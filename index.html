@@ -97,32 +97,49 @@ html, body {
 
 .tabs {
     background: #4a148c !important;
-    white-space: nowrap !important;
-    overflow-x: auto !important;
-    width: 100% !important;
     display: flex !important;
-    flex-shrink: 0 !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: nowrap !important;
+    width: 100% !important;
 }
 
 .tabs .tab {
-    flex-grow: 1 !important;
-    min-width: fit-content !important;
+    display: inline-flex !important;
+    flex: 0 0 auto !important;
+    min-width: max-content !important;
 }
 
 .tabs .tab a {
     color: white !important;
-    text-transform: uppercase !important;
     font-size: 13px !important;
-    padding: 0 15px !important;
+    padding: 0 20px !important;
+    text-transform: uppercase !important;
+    height: 48px !important;
+    line-height: 48px !important;
+    display: flex !important;
+    align-items: center !important;
 }
 
 .tabs .tab a.active {
     background: rgba(255,255,255,0.2) !important;
 }
 #sidebar {
-    scrollbar-width: thin;
-    scrollbar-color: white transparent;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
+
+#sidebar .sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+#sidebar .logo-final {
+    padding: 20px;
+    text-align: center;
+}
+
 
 #sidebar::-webkit-scrollbar {
     width: 8px;
@@ -212,8 +229,8 @@ li.active .collapsible-header::before {
 <body>
 
     <!-- NAVBAR SUPERIOR -->
-    <div id="top-navbar">
-        <img src="imagenes/pico.png" alt="Logo Municipal">
+    <div id="top-navbar" >
+        <img src="imagenes/pico.png"  alt="Logo Municipal">
     </div>
     
     <!-- LAYOUT PRINCIPAL -->
@@ -232,8 +249,8 @@ li.active .collapsible-header::before {
             <div class="sidebar-title">Años</div>
             <a class="modal-trigger" href="#modal-anios" style="padding-left:20px;">Años anteriores</a>
     
-            <div id="logo-pie">
-                <img src="imagenes/ome.png" style="width:80%; opacity:0.9;">
+            <div id="logo-final">
+                <img src="imagenes/ome.png" style="width:40%; opacity:0.9;">
             </div>
         </div>
     
