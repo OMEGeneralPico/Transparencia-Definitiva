@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,107 +14,114 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
+
+/* GENERAL */
 html, body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    overflow: hidden; /* SIN SCROLL */
+    overflow: hidden;
     background: #f5f5f5;
     font-family: "Roboto", sans-serif;
 }
 
-/* Navbar superior (Nuevo) */
+/* NAVBAR SUPERIOR */
 #top-navbar {
-    background: #1b5e20; /* Verde municipal, mismo color que el sidebar */
-    height: 64px; /* Altura estándar de navbar de Materialize */
+    background: #1b5e20;
+    height: 64px;
     padding: 0 20px;
     display: flex;
     align-items: center;
 }
 
 #top-navbar img {
-    height: 50px; /* Tamaño del logo en el navbar */
+    height: 50px;
     opacity: 0.9;
 }
 
-/* Layout principal: DEDUCE la altura del navbar (100vh - 64px) */
+/* LAYOUT */
 #layout {
     display: grid;
-    /* Divide el espacio restante: 260px para Sidebar y 'auto' para Main */
     grid-template-columns: 260px auto;
-    height: calc(100vh - 64px); /* Altura total menos el navbar */
+    height: calc(100vh - 64px);
 }
 
-/* Sidebar */
+/* SIDEBAR */
 #sidebar {
-    background: #1b5e20; /* Verde municipal */
+    background: #1b5e20;
     color: white;
     padding: 0;
     display: flex;
     flex-direction: column;
-}
-
-#secretarias-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    flex-grow: 1;
     overflow-y: auto;
 }
 
-#secretarias-list li {
+.sidebar-title {
     padding: 14px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Collapsible */
+.collapsible-header {
+    background: #1b5e20 !important;
+    color: white !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+#semestre-dropdown a,
+#secretarias-list li {
+    color: white !important;
+    padding: 10px 20px;
+    display: block;
     cursor: pointer;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-#secretarias-list li:hover {
-    background: rgba(255,255,255,0.15);
+#secretarias-list li:hover,
+#semestre-dropdown a:hover {
+    background: rgba(255,255,255,0.1);
 }
 
-/* Logo pie del sidebar */
 #logo-pie {
-    padding: 16px;
+    padding: 20px;
     text-align: center;
-    /* Ocultar el logo del pie si ya está en el navbar para no duplicar */
-    /* display: none; */ 
 }
 
-/* Contenido principal */
+/* MAIN */
 #main {
     display: flex;
     flex-direction: column;
     height: 100%;
-    /* La columna 'auto' de #layout asegura que #main nunca exceda el 100% del ancho disponible */
 }
 
-/* Tabs - CORRECCIÓN PARA ASEGURAR ANCHO Y SCROLL HORIZONTAL */
+/* TABS — TU ESTILO */
 .tabs {
-    background: #4a148c; /* Violeta oscuro */
+    background: #4a148c;
     white-space: nowrap;
     overflow-x: auto;
-    width: 100%; /* Asegura que ocupe todo el ancho de su contenedor (#main) */
-    display: flex; /* Asegura que las pestañas fluyan horizontalmente */
-    flex-shrink: 0; /* Evita que Materialize intente reducir su tamaño */
+    width: 100%;
+    display: flex;
+    flex-shrink: 0;
 }
 
 .tabs .tab {
-    flex-grow: 1; /* Permite que cada pestaña crezca para llenar el espacio */
-    min-width: fit-content; /* Evita que las pestañas se hagan demasiado pequeñas */
+    flex-grow: 1;
+    min-width: fit-content;
 }
 
 .tabs .tab a {
     color: white !important;
     text-transform: uppercase;
     font-size: 13px;
-    padding: 0 15px; /* Ajuste de padding para mejor visualización */
+    padding: 0 15px;
 }
 
 .tabs .tab a.active {
     background: rgba(255,255,255,0.2);
 }
 
-/* Bento Grid */
+/* BENTO GRID */
 #direccion-content {
     flex-grow: 1;
     padding: 12px;
@@ -135,17 +143,8 @@ html, body {
     overflow: hidden;
 }
 
-/* Funcionarios */
-#funcionarios-card {
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-}
-
-/* Grafico */
-#grafico-card {
-    position: relative;
-}
+#funcionarios-card { overflow-y: auto; }
+#grafico-card { position: relative; }
 
 /* Progress Bars */
 #progress-card {
@@ -158,312 +157,327 @@ html, body {
     margin-bottom: 2px;
 }
 
-/* AUMENTAR GROSOR DE BARRA DE PROGRESO INFERIOR (Materialize default es muy fina) */
 .progress {
-    height: 18px; /* Aumentado de un default fino a 18px */
+    height: 18px;
     background-color: #e0e0e0;
     border-radius: 9px;
-    margin-bottom: 8px; /* Espacio entre barras */
+    margin-bottom: 10px;
 }
-
 .progress .determinate {
     border-radius: 9px;
+    background-color: #4a148c !important;
 }
 </style>
 
 </head>
+
 <body>
 
-<!-- NUEVO NAVBAR SUPERIOR -->
-<div id="top-navbar">
-    <img src="imagenes/pico.png" alt="Logo Municipal">
-</div>
-<!-- FIN NUEVO NAVBAR SUPERIOR -->
-
-<div id="layout">
-
-    <!-- SIDEBAR -->
-    <div id="sidebar">
-        <ul id="secretarias-list"></ul>
-
-        <div id="logo-pie">
-            <img src="imagenes/ome.png" alt="logo" style="width:80%; opacity:0.9;">
-        </div>
+    <!-- NAVBAR SUPERIOR -->
+    <div id="top-navbar">
+        <img src="imagenes/pico.png" alt="Logo Municipal">
     </div>
-
-    <!-- MAIN -->
-    <div id="main">
-
-        <!-- TABS -->
-        <ul class="tabs" id="direcciones-tabs"></ul>
-
-        <!-- CONTENIDO PRINCIPAL -->
-        <div id="direccion-content">
-            <div class="bento-grid">
-
-                <!-- Funcionarios -->
-                <div class="bento-item" id="funcionarios-card">
-                    <div id="func-list">Seleccione una Dirección</div>
-                </div>
-
-                <!-- Gráfico -->
-                <div class="bento-item" id="grafico-card">
-                    <canvas id="chart-actual"></canvas>
-                </div>
-
-                <!-- Progress Bars -->
-                <div class="bento-item" id="progress-card">
-                    <div id="progress-container">
-                        <!-- Nombres de progresos basados en tu mapeo -->
-                        <div>
-                            <div class="progress-title">1 - Gastos en Personal</div>
-                            <div class="progress"><div class="determinate"></div></div>
-                        </div>
-                        <div>
-                            <div class="progress-title">2 - Bienes de Consumo</div>
-                            <div class="progress"><div class="determinate"></div></div>
-                        </div>
-                        <div>
-                            <div class="progress-title">3 - Servicios No Personales</div>
-                            <div class="progress"><div class="determinate"></div></div>
-                        </div>
-                        <div>
-                            <div class="progress-title">4 - Transferencias Sociales</div>
-                            <div class="progress"><div class="determinate"></div></div>
-                        </div>
-                        <div>
-                            <div class="progress-title">5 - Bienes de Capital</div>
-                            <div class="progress"><div class="determinate"></div></div>
-                        </div>
-                        <div>
-                            <div class="progress-title">6 - Trabajo Público</div>
-                            <div class="progress"><div class="determinate"></div></div>
-                        </div>
-                        <div>
-                            <div class="progress-title">7 - Créditos</div>
-                            <div class="progress"><div class="determinate"></div></div>
-                        </div>
-                         <!-- Se eliminan los que no se usan en el mapeo inicial de 1 a 7 para el progress bar -->
-                    </div>
-                </div>
-
+    
+    <!-- LAYOUT PRINCIPAL -->
+    <div id="layout">
+    
+        <!-- SIDEBAR -->
+        <div id="sidebar">
+    
+            <div class="sidebar-title">Semestres</div>
+    
+            <!-- COLLAPSIBLE POR SEMESTRE -->
+            <ul class="collapsible" id="semestres-collapsible" style="border:0; box-shadow:none; margin:0;">
+                <!-- Aquí se cargan dinámicamente los semestres + secretarías -->
+            </ul>
+    
+            <div class="sidebar-title">Años</div>
+            <a class="modal-trigger" href="#modal-anios" style="padding-left:20px;">Años anteriores</a>
+    
+            <div id="logo-pie">
+                <img src="imagenes/ome.png" style="width:80%; opacity:0.9;">
             </div>
         </div>
-
-    </div>
-</div>
-
-
-
-<!-- SCRIPT TOTAL -->
-<script>
-    document.addEventListener('DOMContentLoaded', function(){
     
+        <!-- MAIN -->
+        <div id="main">
+    
+            <!-- TABS DE DIRECCIONES -->
+            <ul class="tabs" id="direcciones-tabs"></ul>
+    
+            <!-- CONTENIDO DIRECCIÓN -->
+            <div id="direccion-content">
+                <div class="bento-grid">
+    
+                    <!-- Funcionarios -->
+                    <div class="bento-item" id="funcionarios-card">
+                        <div id="func-list">Seleccione una Dirección</div>
+                    </div>
+    
+                    <!-- Gráfico -->
+                    <div class="bento-item" id="grafico-card">
+                        <canvas id="chart-actual"></canvas>
+                    </div>
+    
+                    <!-- Progress Bars -->
+                    <div class="bento-item" id="progress-card">
+                        <div id="progress-container">
+                            <div><div class="progress-title">1 - Gastos en Personal</div><div class="progress"><div class="determinate"></div></div></div>
+                            <div><div class="progress-title">2 - Bienes de Consumo</div><div class="progress"><div class="determinate"></div></div></div>
+                            <div><div class="progress-title">3 - Servicios No Personales</div><div class="progress"><div class="determinate"></div></div></div>
+                            <div><div class="progress-title">4 - Transferencias Sociales</div><div class="progress"><div class="determinate"></div></div></div>
+                            <div><div class="progress-title">5 - Bienes de Capital</div><div class="progress"><div class="determinate"></div></div></div>
+                            <div><div class="progress-title">6 - Trabajo Público</div><div class="progress"><div class="determinate"></div></div></div>
+                            <div><div class="progress-title">7 - Créditos</div><div class="progress"><div class="determinate"></div></div></div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    
+    <!-- MODAL AÑOS ANTERIORES -->
+    <div id="modal-anios" class="modal">
+        <div class="modal-content">
+            <h4>Años disponibles</h4>
+            <div id="lista-anios"></div>
+        </div>
+    </div>
+    
+    <!-- ================================
+             SCRIPT PRINCIPAL
+    ================================ -->
+    <script>
+    
+    document.addEventListener("DOMContentLoaded", function () {
+    
+        M.Collapsible.init(document.querySelectorAll('.collapsible'));
+        M.Modal.init(document.querySelectorAll('.modal'));
+    
+        let dataGlobal = null;
+        let YEAR_SELECTED = null;
+        let SEMESTRE_SELECTED = null;
         let chartInstance = null;
     
-        const Z_MAPPING = {
-            'Z=1': 0, 'Z=2': 1, 'Z=3': 2, 'Z=4': 3,
-            'Z=5': 4, 'Z=6': 5, 'Z=7': 6
+        const Z_MAPPING = { "Z=1": 0, "Z=2": 1, "Z=3": 2, "Z=4": 3, "Z=5": 4, "Z=6": 5, "Z=7": 6 };
+    
+        /* Guardamos los títulos originales */
+        const PROGRESS_TITLES = [];
+        document.querySelectorAll('#progress-container .progress-title')
+            .forEach(t => PROGRESS_TITLES.push(t.textContent));
+    
+        /* Cargar JSON */
+        fetch("presupuesto.json")
+            .then(r => r.json())
+            .then(data => iniciarSistema(data))
+            .catch(err => console.error("Error cargando JSON:", err));
+    
+        /* ================================
+                  INICIO SISTEMA
+           ================================ */
+        function iniciarSistema(data) {
+            dataGlobal = data;
+    
+            // Año por defecto → el primero del JSON
+            YEAR_SELECTED = Object.keys(dataGlobal)[0];
+    
+            cargarModalAnios();
+            cargarSemestresSidebar();
+        }
+    
+        /* ================================
+                  MODAL AÑOS
+           ================================ */
+        function cargarModalAnios() {
+            const lista = document.getElementById("lista-anios");
+            lista.innerHTML = "";
+    
+            Object.keys(dataGlobal).forEach(anio => {
+                lista.innerHTML += `<p><a onclick="cambiarAnio('${anio}')">${anio}</a></p>`;
+            });
+        }
+    
+        window.cambiarAnio = function(anio) {
+            YEAR_SELECTED = anio;
+            SEMESTRE_SELECTED = null;
+            cargarSemestresSidebar();
+            M.Modal.getInstance(document.getElementById("modal-anios")).close();
         };
     
-        // ============================================
-        // GUARDAR LOS NOMBRES BASE UNA SOLA VEZ
-        // ============================================
-        const PROGRESS_TITLES = [];
+        /* ================================
+            SIDEBAR → SEMESTRES + SECRETARÍAS
+           ================================ */
+        function cargarSemestresSidebar() {
     
-        function saveBaseTitlesOnce(){
-            const titles = document.querySelectorAll('#progress-container .progress-title');
-            if(PROGRESS_TITLES.length === 0){
-                titles.forEach(t => PROGRESS_TITLES.push(t.textContent));
-            }
-        }
+            const coll = document.getElementById("semestres-collapsible");
+            coll.innerHTML = "";
     
-        saveBaseTitlesOnce();
+            const semestres = Object.keys(dataGlobal[YEAR_SELECTED]);
     
-        // ============================================
-        // BARRAS + MONTOS
-        // ============================================
-        function setProgress(values, montos){
-            const bars = document.querySelectorAll('#progress-container .progress');
-            const titles = document.querySelectorAll('#progress-container .progress-title');
+            semestres.forEach(sem => {
+                const nombreSem =
+                    sem === "primer_semestre" ? "Primer Semestre" :
+                    sem === "segundo_semestre" ? "Segundo Semestre" :
+                    sem;
     
-            bars.forEach((bar, i) => {
-                const determinate = bar.querySelector('.determinate');
+                /* Crear ítem del semestre */
+                const li = document.createElement("li");
     
-                const pct = Math.min(values[i] || 0, 100);
-                determinate.style.width = pct + "%";
-                determinate.style.backgroundColor = pct > 100 ? "#f44336" : "#4a148c";
+                li.innerHTML = `
+                    <div class="collapsible-header">${nombreSem}</div>
+                    <div class="collapsible-body" style="padding:0;">
+                        <ul class="collection" id="sec-${sem}" style="border:0; margin:0;"></ul>
+                    </div>
+                `;
     
-                const monto = montos[i] || 0;
-                const montoFmt = monto.toLocaleString("es-AR", { minimumFractionDigits: 2 });
+                coll.appendChild(li);
     
-                // usar texto original, sin duplicar jamás
-                const base = PROGRESS_TITLES[i];
+                /* Cargar secretarías dentro del semestre */
+                const secList = li.querySelector(`#sec-${sem}`);
+                const semData = dataGlobal[YEAR_SELECTED][sem];
     
-                titles[i].textContent = `${base} — $ ${montoFmt}`;
-            });
-        }
+                if (semData.secretarias) {
+                    Object.keys(semData.secretarias).forEach(cod => {
+                        const sec = semData.secretarias[cod];
     
-        function makeChart(ctx, data=[0,0]){
-            return new Chart(ctx, {
-                type:'bar',
-                data:{
-                    labels:['Presupuesto','Ejecución Total'],
-                    datasets:[{
-                        label:'Montos',
-                        data: data,
-                        backgroundColor: ['#64b5f6', '#4caf50'],
-                        barPercentage: 0.95,
-                        categoryPercentage: 0.95
-                    }]
-                },
-                options:{
-                    responsive:true,
-                    maintainAspectRatio:false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: function(value) {
-                                    if (value >= 1e9) return (value / 1e9).toFixed(2) + ' B';
-                                    if (value >= 1e6) return (value / 1e6).toFixed(2) + ' M';
-                                    if (value >= 1e3) return (value / 1e3).toFixed(2) + ' K';
-                                    return value;
-                                }
-                            }
-                        }
-                    }
+                        const item = document.createElement("li");
+                        item.className = "collection-item";
+                        item.style.cssText = "background:#1b5e20; color:white; cursor:pointer;";
+    
+                        item.textContent = sec.nombre;
+    
+                        item.addEventListener("click", () => {
+                            document.querySelectorAll(".collection-item")
+                                .forEach(x => x.style.background = "#1b5e20");
+                            item.style.background = "rgba(255,255,255,0.2)";
+                            SEMESTRE_SELECTED = sem;
+                            cargarDirecciones(sec);
+                        });
+    
+                        secList.appendChild(item);
+                    });
                 }
             });
+    
+            M.Collapsible.init(document.querySelectorAll('.collapsible'));
+    
+            /* Seleccionar por defecto el primer semestre */
+            SEMESTRE_SELECTED = semestres[0];
+    
+            /* Seleccionar automáticamente la primera secretaría */
+            const firstSecretaria =
+                coll.querySelector("ul.collection .collection-item");
+    
+            if (firstSecretaria) firstSecretaria.click();
         }
     
-        // ============================================
-        // CARGA DE DATOS
-        // ============================================
+        /* ================================
+               DIRECCIONES → TABS
+           ================================ */
+        function cargarDirecciones(sec) {
     
-        fetch("presupuesto.json")
-            .then(r=>r.json())
-            .then(data=> iniciar(data))
-            .catch(error => console.error("Error al cargar presupuesto.json:", error));
-    
-        function iniciar(data){
-            const secList = document.getElementById("secretarias-list");
-            secList.innerHTML = "";
-    
-            if(!data || !data.secretarias){
-                secList.innerHTML = "<li>No hay secretarías</li>";
-                return;
-            }
-    
-            Object.keys(data.secretarias).forEach((cod)=>{
-                const sec = data.secretarias[cod];
-                let li = document.createElement("li");
-                li.textContent = sec.nombre;
-                li.dataset.cod = cod;
-                secList.appendChild(li);
-    
-                li.addEventListener("click", ()=>{
-                    document.querySelectorAll("#secretarias-list li")
-                        .forEach(x=>x.style.background="transparent");
-    
-                    li.style.background = "rgba(255,255,255,0.2)";
-                    cargarDirecciones(sec);
-                });
-            });
-    
-            const first = secList.children[0];
-            if(first){
-                first.style.background="rgba(255,255,255,0.2)";
-                const cod = Object.keys(data.secretarias)[0];
-                cargarDirecciones(data.secretarias[cod]);
-            }
-        }
-    
-        function cargarDirecciones(sec){
             const tabs = document.getElementById("direcciones-tabs");
             tabs.innerHTML = "";
     
-            if(!sec.direcciones || sec.direcciones.length === 0){
-                 tabs.innerHTML = `<li class="tab"><a href="#!">Sin Direcciones</a></li>`;
-                 cargarDireccion({nombre: sec.nombre, empleados: 0, funcionarios: {}, gastos: []});
-                 return;
+            if (!sec.direcciones || sec.direcciones.length === 0) {
+                tabs.innerHTML = `<li class="tab"><a href="#!">Sin Direcciones</a></li>`;
+                cargarDireccion({ nombre: sec.nombre, empleados: 0, funcionarios: {}, gastos: [] });
+                return;
             }
     
-            sec.direcciones.forEach((dir, idx)=>{
+            sec.direcciones.forEach((dir, idx) => {
                 let li = document.createElement("li");
                 li.className = "tab";
-                const tabId = `dir-tab-${idx}`;
-                li.innerHTML = `<a href="#${tabId}" data-i="${idx}">${dir.nombre}</a>`;
+                li.innerHTML = `<a data-i="${idx}">${dir.nombre}</a>`;
                 tabs.appendChild(li);
     
-                li.querySelector("a").addEventListener("click", (e)=>{
+                li.querySelector("a").addEventListener("click", (e) => {
                     document.querySelectorAll("#direcciones-tabs .tab a")
-                        .forEach(a => a.classList.remove('active'));
-    
+                        .forEach(a => a.classList.remove("active"));
                     e.target.classList.add('active');
                     cargarDireccion(dir);
                 });
             });
     
             const firstTab = tabs.querySelector(".tab a");
-            if(firstTab){
-                firstTab.classList.add('active');
+            if (firstTab) {
+                firstTab.classList.add("active");
                 cargarDireccion(sec.direcciones[0]);
             }
         }
     
-        function cargarDireccion(dir){
-    
-            // --- Funcionarios
+        /* ================================
+            CONTENIDO DE DIRECCIÓN
+           ================================ */
+        function cargarDireccion(dir) {
             const funcBox = document.getElementById("func-list");
             funcBox.innerHTML = `<h6><b>${dir.nombre}</b></h6>`;
             funcBox.innerHTML += `<p><b>Empleados:</b> ${dir.empleados}</p>`;
     
-            if(!dir.funcionarios){
-                funcBox.innerHTML += `<p>Sin funcionarios registrados.</p>`;
-            } else {
-                Object.entries(dir.funcionarios).forEach(([cargo, nombre])=>{
+            if (dir.funcionarios) {
+                Object.entries(dir.funcionarios).forEach(([cargo, nombre]) => {
                     funcBox.innerHTML += `<p>${cargo}: <b>${nombre}</b></p>`;
                 });
             }
     
-            // --- Gráfico
             const ctx = document.getElementById("chart-actual").getContext("2d");
     
-            const presupTotal = (dir.gastos||[]).reduce((a,g)=>a + (g.presupuestado||0) + (g.reestructura||0),0);
-            const compromTotal = (dir.gastos||[]).reduce((a,g)=>a + (g.comprometido||0),0);
+            const presup = (dir.gastos || []).reduce((a, g) => a + (g.presupuestado || 0) + (g.reestructura || 0), 0);
+            const comprom = (dir.gastos || []).reduce((a, g) => a + (g.comprometido || 0), 0);
     
-            if(chartInstance) chartInstance.destroy();
-            chartInstance = makeChart(ctx, [presupTotal, compromTotal]);
+            if (chartInstance) chartInstance.destroy();
+            chartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Presupuesto', 'Ejecución Total'],
+                    datasets: [{
+                        label: 'Montos',
+                        data: [presup, comprom],
+                        backgroundColor: ['#64b5f6', '#4caf50']
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
     
-            // --- Progress Bars
             const valores = new Array(7).fill(0);
-const montosPorZ = new Array(7).fill(0);
-
-// calcular el total ejecutado de la dirección
-const totalEjecutado = (dir.gastos || []).reduce((a, g) => a + (g.comprometido || 0), 0);
-
-(dir.gastos || []).forEach(g => {
-    const codigoZ = g.codigoZ ? `Z=${g.codigoZ}` : null;
-    const index = Z_MAPPING[codigoZ];
-
-    if(index !== undefined){
-        const c = g.comprometido || 0;
-
-        // guardar monto para mostrar al lado del nombre
-        montosPorZ[index] += c;
-
-        // NUEVO PORCENTAJE
-        valores[index] = totalEjecutado ? Math.round((c / totalEjecutado) * 100) : 0;
-    }
-});
+            const montos = new Array(7).fill(0);
     
-            setProgress(valores, montosPorZ);
+            const totalEj = comprom;
+    
+            (dir.gastos || []).forEach(g => {
+                const key = `Z=${g.codigoZ}`;
+                const idx = Z_MAPPING[key];
+                if (idx !== undefined) {
+                    montos[idx] += (g.comprometido || 0);
+                    valores[idx] = totalEj ? Math.round((g.comprometido / totalEj) * 100) : 0;
+                }
+            });
+    
+            setProgress(valores, montos);
+        }
+    
+        /* ================================
+                  PROGRESS BARS
+           ================================ */
+        function setProgress(valores, montos) {
+            const bars = document.querySelectorAll('#progress-container .progress');
+            const titles = document.querySelectorAll('#progress-container .progress-title');
+    
+            bars.forEach((bar, i) => {
+                const determinate = bar.querySelector(".determinate");
+    
+                determinate.style.width = valores[i] + "%";
+    
+                const montoFmt = montos[i].toLocaleString("es-AR", { minimumFractionDigits: 2 });
+                titles[i].textContent = `${PROGRESS_TITLES[i]} — $ ${montoFmt}`;
+            });
         }
     
     });
     </script>
     
-
-</body>
+    </body>
+    
 </html>
