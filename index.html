@@ -170,7 +170,11 @@ html, body {
 </style>
 
 </head>
-
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        M.AutoInit();
+    });
+    </script>
 <body>
 
     <!-- NAVBAR SUPERIOR -->
@@ -249,235 +253,235 @@ html, body {
     <!-- ================================
              SCRIPT PRINCIPAL
     ================================ -->
-    <script>
-    
-    document.addEventListener("DOMContentLoaded", function () {
-    
-        M.Collapsible.init(document.querySelectorAll('.collapsible'));
-        M.Modal.init(document.querySelectorAll('.modal'));
-    
-        let dataGlobal = null;
-        let YEAR_SELECTED = null;
-        let SEMESTRE_SELECTED = null;
-        let chartInstance = null;
-    
-        const Z_MAPPING = { "Z=1": 0, "Z=2": 1, "Z=3": 2, "Z=4": 3, "Z=5": 4, "Z=6": 5, "Z=7": 6 };
-    
-        /* Guardamos los títulos originales */
-        const PROGRESS_TITLES = [];
-        document.querySelectorAll('#progress-container .progress-title')
-            .forEach(t => PROGRESS_TITLES.push(t.textContent));
-    
-        /* Cargar JSON */
-        fetch("presupuesto.json")
-            .then(r => r.json())
-            .then(data => iniciarSistema(data))
-            .catch(err => console.error("Error cargando JSON:", err));
-    
-        /* ================================
-                  INICIO SISTEMA
-           ================================ */
-        function iniciarSistema(data) {
-            dataGlobal = data;
-    
-            // Año por defecto → el primero del JSON
-            YEAR_SELECTED = Object.keys(dataGlobal)[0];
-    
-            cargarModalAnios();
-            cargarSemestresSidebar();
-        }
-    
-        /* ================================
-                  MODAL AÑOS
-           ================================ */
-        function cargarModalAnios() {
-            const lista = document.getElementById("lista-anios");
-            lista.innerHTML = "";
-    
-            Object.keys(dataGlobal).forEach(anio => {
-                lista.innerHTML += `<p><a onclick="cambiarAnio('${anio}')">${anio}</a></p>`;
-            });
-        }
-    
-        window.cambiarAnio = function(anio) {
-            YEAR_SELECTED = anio;
-            SEMESTRE_SELECTED = null;
-            cargarSemestresSidebar();
-            M.Modal.getInstance(document.getElementById("modal-anios")).close();
-        };
-    
-        /* ================================
-            SIDEBAR → SEMESTRES + SECRETARÍAS
-           ================================ */
-        function cargarSemestresSidebar() {
-    
-            const coll = document.getElementById("semestres-collapsible");
-            coll.innerHTML = "";
-    
-            const semestres = Object.keys(dataGlobal[YEAR_SELECTED]);
-    
-            semestres.forEach(sem => {
-                const nombreSem =
-                    sem === "primer_semestre" ? "Primer Semestre" :
-                    sem === "segundo_semestre" ? "Segundo Semestre" :
-                    sem;
-    
-                /* Crear ítem del semestre */
-                const li = document.createElement("li");
-    
-                li.innerHTML = `
-                    <div class="collapsible-header">${nombreSem}</div>
-                    <div class="collapsible-body" style="padding:0;">
-                        <ul class="collection" id="sec-${sem}" style="border:0; margin:0;"></ul>
-                    </div>
-                `;
-    
-                coll.appendChild(li);
-    
-                /* Cargar secretarías dentro del semestre */
-                const secList = li.querySelector(`#sec-${sem}`);
-                const semData = dataGlobal[YEAR_SELECTED][sem];
-    
-                if (semData.secretarias) {
-                    Object.keys(semData.secretarias).forEach(cod => {
-                        const sec = semData.secretarias[cod];
-    
-                        const item = document.createElement("li");
-                        item.className = "collection-item";
-                        item.style.cssText = "background:#1b5e20; color:white; cursor:pointer;";
-    
-                        item.textContent = sec.nombre;
-    
-                        item.addEventListener("click", () => {
-                            document.querySelectorAll(".collection-item")
-                                .forEach(x => x.style.background = "#1b5e20");
-                            item.style.background = "rgba(255,255,255,0.2)";
-                            SEMESTRE_SELECTED = sem;
-                            cargarDirecciones(sec);
-                        });
-    
-                        secList.appendChild(item);
-                    });
-                }
-            });
-    
-            M.Collapsible.init(document.querySelectorAll('.collapsible'));
-    
-            /* Seleccionar por defecto el primer semestre */
-            SEMESTRE_SELECTED = semestres[0];
-    
-            /* Seleccionar automáticamente la primera secretaría */
-            const firstSecretaria =
-                coll.querySelector("ul.collection .collection-item");
-    
-            if (firstSecretaria) firstSecretaria.click();
-        }
-    
-        /* ================================
-               DIRECCIONES → TABS
-           ================================ */
-        function cargarDirecciones(sec) {
-    
-            const tabs = document.getElementById("direcciones-tabs");
-            tabs.innerHTML = "";
-    
-            if (!sec.direcciones || sec.direcciones.length === 0) {
-                tabs.innerHTML = `<li class="tab"><a href="#!">Sin Direcciones</a></li>`;
-                cargarDireccion({ nombre: sec.nombre, empleados: 0, funcionarios: {}, gastos: [] });
-                return;
-            }
-    
-            sec.direcciones.forEach((dir, idx) => {
-                let li = document.createElement("li");
-                li.className = "tab";
-                li.innerHTML = `<a data-i="${idx}">${dir.nombre}</a>`;
-                tabs.appendChild(li);
-    
-                li.querySelector("a").addEventListener("click", (e) => {
-                    document.querySelectorAll("#direcciones-tabs .tab a")
-                        .forEach(a => a.classList.remove("active"));
-                    e.target.classList.add('active');
-                    cargarDireccion(dir);
-                });
-            });
-    
-            const firstTab = tabs.querySelector(".tab a");
-            if (firstTab) {
-                firstTab.classList.add("active");
-                cargarDireccion(sec.direcciones[0]);
-            }
-        }
-    
-        /* ================================
-            CONTENIDO DE DIRECCIÓN
-           ================================ */
-        function cargarDireccion(dir) {
-            const funcBox = document.getElementById("func-list");
-            funcBox.innerHTML = `<h6><b>${dir.nombre}</b></h6>`;
-            funcBox.innerHTML += `<p><b>Empleados:</b> ${dir.empleados}</p>`;
-    
-            if (dir.funcionarios) {
-                Object.entries(dir.funcionarios).forEach(([cargo, nombre]) => {
-                    funcBox.innerHTML += `<p>${cargo}: <b>${nombre}</b></p>`;
-                });
-            }
-    
-            const ctx = document.getElementById("chart-actual").getContext("2d");
-    
-            const presup = (dir.gastos || []).reduce((a, g) => a + (g.presupuestado || 0) + (g.reestructura || 0), 0);
-            const comprom = (dir.gastos || []).reduce((a, g) => a + (g.comprometido || 0), 0);
-    
-            if (chartInstance) chartInstance.destroy();
-            chartInstance = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Presupuesto', 'Ejecución Total'],
-                    datasets: [{
-                        label: 'Montos',
-                        data: [presup, comprom],
-                        backgroundColor: ['#64b5f6', '#4caf50']
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false }
-            });
-    
-            const valores = new Array(7).fill(0);
-            const montos = new Array(7).fill(0);
-    
-            const totalEj = comprom;
-    
-            (dir.gastos || []).forEach(g => {
-                const key = `Z=${g.codigoZ}`;
-                const idx = Z_MAPPING[key];
-                if (idx !== undefined) {
-                    montos[idx] += (g.comprometido || 0);
-                    valores[idx] = totalEj ? Math.round((g.comprometido / totalEj) * 100) : 0;
-                }
-            });
-    
-            setProgress(valores, montos);
-        }
-    
-        /* ================================
-                  PROGRESS BARS
-           ================================ */
-        function setProgress(valores, montos) {
-            const bars = document.querySelectorAll('#progress-container .progress');
-            const titles = document.querySelectorAll('#progress-container .progress-title');
-    
-            bars.forEach((bar, i) => {
-                const determinate = bar.querySelector(".determinate");
-    
-                determinate.style.width = valores[i] + "%";
-    
-                const montoFmt = montos[i].toLocaleString("es-AR", { minimumFractionDigits: 2 });
-                titles[i].textContent = `${PROGRESS_TITLES[i]} — $ ${montoFmt}`;
-            });
-        }
-    
-    });
-    </script>
+ 
     
     </body>
+    <script>
     
+        document.addEventListener("DOMContentLoaded", function () {
+        
+            M.Collapsible.init(document.querySelectorAll('.collapsible'));
+            M.Modal.init(document.querySelectorAll('.modal'));
+        
+            let dataGlobal = null;
+            let YEAR_SELECTED = null;
+            let SEMESTRE_SELECTED = null;
+            let chartInstance = null;
+        
+            const Z_MAPPING = { "Z=1": 0, "Z=2": 1, "Z=3": 2, "Z=4": 3, "Z=5": 4, "Z=6": 5, "Z=7": 6 };
+        
+            /* Guardamos los títulos originales */
+            const PROGRESS_TITLES = [];
+            document.querySelectorAll('#progress-container .progress-title')
+                .forEach(t => PROGRESS_TITLES.push(t.textContent));
+        
+            /* Cargar JSON */
+            fetch("presupuesto.json")
+                .then(r => r.json())
+                .then(data => iniciarSistema(data))
+                .catch(err => console.error("Error cargando JSON:", err));
+        
+            /* ================================
+                      INICIO SISTEMA
+               ================================ */
+            function iniciarSistema(data) {
+                dataGlobal = data;
+        
+                // Año por defecto → el primero del JSON
+                YEAR_SELECTED = Object.keys(dataGlobal)[0];
+        
+                cargarModalAnios();
+                cargarSemestresSidebar();
+            }
+        
+            /* ================================
+                      MODAL AÑOS
+               ================================ */
+            function cargarModalAnios() {
+                const lista = document.getElementById("lista-anios");
+                lista.innerHTML = "";
+        
+                Object.keys(dataGlobal).forEach(anio => {
+                    lista.innerHTML += `<p><a onclick="cambiarAnio('${anio}')">${anio}</a></p>`;
+                });
+            }
+        
+            window.cambiarAnio = function(anio) {
+                YEAR_SELECTED = anio;
+                SEMESTRE_SELECTED = null;
+                cargarSemestresSidebar();
+                M.Modal.getInstance(document.getElementById("modal-anios")).close();
+            };
+        
+            /* ================================
+                SIDEBAR → SEMESTRES + SECRETARÍAS
+               ================================ */
+            function cargarSemestresSidebar() {
+        
+                const coll = document.getElementById("semestres-collapsible");
+                coll.innerHTML = "";
+        
+                const semestres = Object.keys(dataGlobal[YEAR_SELECTED]);
+        
+                semestres.forEach(sem => {
+                    const nombreSem =
+                        sem === "primer_semestre" ? "Primer Semestre" :
+                        sem === "segundo_semestre" ? "Segundo Semestre" :
+                        sem;
+        
+                    /* Crear ítem del semestre */
+                    const li = document.createElement("li");
+        
+                    li.innerHTML = `
+                        <div class="collapsible-header">${nombreSem}</div>
+                        <div class="collapsible-body" style="padding:0;">
+                            <ul class="collection" id="sec-${sem}" style="border:0; margin:0;"></ul>
+                        </div>
+                    `;
+        
+                    coll.appendChild(li);
+        
+                    /* Cargar secretarías dentro del semestre */
+                    const secList = li.querySelector(`#sec-${sem}`);
+                    const semData = dataGlobal[YEAR_SELECTED][sem];
+        
+                    if (semData.secretarias) {
+                        Object.keys(semData.secretarias).forEach(cod => {
+                            const sec = semData.secretarias[cod];
+        
+                            const item = document.createElement("li");
+                            item.className = "collection-item";
+                            item.style.cssText = "background:#1b5e20; color:white; cursor:pointer;";
+        
+                            item.textContent = sec.nombre;
+        
+                            item.addEventListener("click", () => {
+                                document.querySelectorAll(".collection-item")
+                                    .forEach(x => x.style.background = "#1b5e20");
+                                item.style.background = "rgba(255,255,255,0.2)";
+                                SEMESTRE_SELECTED = sem;
+                                cargarDirecciones(sec);
+                            });
+        
+                            secList.appendChild(item);
+                        });
+                    }
+                });
+        
+                M.Collapsible.init(document.querySelectorAll('.collapsible'));
+        
+                /* Seleccionar por defecto el primer semestre */
+                SEMESTRE_SELECTED = semestres[0];
+        
+                /* Seleccionar automáticamente la primera secretaría */
+                const firstSecretaria =
+                    coll.querySelector("ul.collection .collection-item");
+        
+                if (firstSecretaria) firstSecretaria.click();
+            }
+        
+            /* ================================
+                   DIRECCIONES → TABS
+               ================================ */
+            function cargarDirecciones(sec) {
+        
+                const tabs = document.getElementById("direcciones-tabs");
+                tabs.innerHTML = "";
+        
+                if (!sec.direcciones || sec.direcciones.length === 0) {
+                    tabs.innerHTML = `<li class="tab"><a href="#!">Sin Direcciones</a></li>`;
+                    cargarDireccion({ nombre: sec.nombre, empleados: 0, funcionarios: {}, gastos: [] });
+                    return;
+                }
+        
+                sec.direcciones.forEach((dir, idx) => {
+                    let li = document.createElement("li");
+                    li.className = "tab";
+                    li.innerHTML = `<a data-i="${idx}">${dir.nombre}</a>`;
+                    tabs.appendChild(li);
+        
+                    li.querySelector("a").addEventListener("click", (e) => {
+                        document.querySelectorAll("#direcciones-tabs .tab a")
+                            .forEach(a => a.classList.remove("active"));
+                        e.target.classList.add('active');
+                        cargarDireccion(dir);
+                    });
+                });
+        
+                const firstTab = tabs.querySelector(".tab a");
+                if (firstTab) {
+                    firstTab.classList.add("active");
+                    cargarDireccion(sec.direcciones[0]);
+                }
+            }
+        
+            /* ================================
+                CONTENIDO DE DIRECCIÓN
+               ================================ */
+            function cargarDireccion(dir) {
+                const funcBox = document.getElementById("func-list");
+                funcBox.innerHTML = `<h6><b>${dir.nombre}</b></h6>`;
+                funcBox.innerHTML += `<p><b>Empleados:</b> ${dir.empleados}</p>`;
+        
+                if (dir.funcionarios) {
+                    Object.entries(dir.funcionarios).forEach(([cargo, nombre]) => {
+                        funcBox.innerHTML += `<p>${cargo}: <b>${nombre}</b></p>`;
+                    });
+                }
+        
+                const ctx = document.getElementById("chart-actual").getContext("2d");
+        
+                const presup = (dir.gastos || []).reduce((a, g) => a + (g.presupuestado || 0) + (g.reestructura || 0), 0);
+                const comprom = (dir.gastos || []).reduce((a, g) => a + (g.comprometido || 0), 0);
+        
+                if (chartInstance) chartInstance.destroy();
+                chartInstance = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Presupuesto', 'Ejecución Total'],
+                        datasets: [{
+                            label: 'Montos',
+                            data: [presup, comprom],
+                            backgroundColor: ['#64b5f6', '#4caf50']
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+        
+                const valores = new Array(7).fill(0);
+                const montos = new Array(7).fill(0);
+        
+                const totalEj = comprom;
+        
+                (dir.gastos || []).forEach(g => {
+                    const key = `Z=${g.codigoZ}`;
+                    const idx = Z_MAPPING[key];
+                    if (idx !== undefined) {
+                        montos[idx] += (g.comprometido || 0);
+                        valores[idx] = totalEj ? Math.round((g.comprometido / totalEj) * 100) : 0;
+                    }
+                });
+        
+                setProgress(valores, montos);
+            }
+        
+            /* ================================
+                      PROGRESS BARS
+               ================================ */
+            function setProgress(valores, montos) {
+                const bars = document.querySelectorAll('#progress-container .progress');
+                const titles = document.querySelectorAll('#progress-container .progress-title');
+        
+                bars.forEach((bar, i) => {
+                    const determinate = bar.querySelector(".determinate");
+        
+                    determinate.style.width = valores[i] + "%";
+        
+                    const montoFmt = montos[i].toLocaleString("es-AR", { minimumFractionDigits: 2 });
+                    titles[i].textContent = `${PROGRESS_TITLES[i]} — $ ${montoFmt}`;
+                });
+            }
+        
+        });
+        </script>
 </html>
