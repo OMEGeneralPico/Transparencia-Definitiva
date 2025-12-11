@@ -1,0 +1,1817 @@
+{
+    "periodo": "Segundo Semestre 2025",
+    "secretarias": {
+      "1": {
+        "codigo": "1",
+        "nombre": "CONCEJO DELIBERANTE",
+        "direcciones": [
+          {
+            "codigo": "10",
+            "nombre": "CONCEJO DELIBERANTE",
+            "empleados": 0,
+            "funcionarios": {"PRESIDENTE":"Campo Alberto Ramon","VICEPRESIDENTE PRIMERO":"Gomez Roberto Anibal","VICEPRESIDENTA SEGUNDA":"Cintia Belen Gette","SECRETARIA":"Cabrino Maria Daniela","SECRETARIO ADMINISTRATIVO":"Gomez Huinchinao Juan Jose Antonio"},
+            "descripcion": "",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 1529402101,
+                "reestructura": 0,
+                "comprometido": 1289438025.41
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 233923521,
+                "reestructura": 0,
+                "comprometido": 19896354.78
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 489736713,
+                "reestructura": -6229000,
+                "comprometido": 56408327.77
+              },
+              {
+                "tipo_gasto": "Z=4",
+                "codigoZ": "4",
+                "presupuestado": 2000000,
+                "reestructura": 250000,
+                "comprometido": 1250000
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 5979000,
+                "comprometido": 5881880.54
+              }
+            ]
+          }
+        ]
+      },
+      "2": {
+        "codigo": "2",
+        "nombre": "INTENDENCIA",
+        "direcciones": [
+          {
+            "codigo": "20",
+            "nombre": "INTENDENCIA",
+            "empleados": 0,
+            "funcionarios": {"INTENDENTA MUNICIPAL": "Alonso Fernanda Estefania","SECRETARIO COORDINADOR":"Privitera Edgardo Roberto"},
+            "descripcion": "Establecer las políticas generales de la gestión municipal",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 216070868,
+                "reestructura": 46147429.59,
+                "comprometido": 168871450.52
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 27140000,
+                "reestructura": -18200000,
+                "comprometido": 8765610.51
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 93700000,
+                "reestructura": -2300000,
+                "comprometido": 72614469.12
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 76614078,
+                "reestructura": -75580876,
+                "comprometido": 726789.97
+              }
+            ]
+          },
+          {
+            "codigo": "21",
+            "nombre": "JUZGADO DE FALTAS",
+            "empleados": 0,
+            "funcionarios": {"JUZGADO DE FALTAS": "Lettieri Eduardo Nicolas","SECRETARIA DE TRÁNSITO DEL TRIBUNAL DE FALTAS":"Bertone Fabiana Beatriz","SECRETARIA DE COMERCIO DEL TRIBUNAL DE FALTAS":"Morales Laura Soledad"},
+            "descripcion": "Dictar sentencias por las infracciones  a las ordenanzas municipales vigentes.",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 360078985,
+                "reestructura": 0,
+                "comprometido": 313594152.85
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 2527543,
+                "reestructura": 0,
+                "comprometido": 2392624.8
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 71885738,
+                "reestructura": -13516250,
+                "comprometido": 46615207.68
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 2041304.8,
+                "comprometido": 2041304.8
+              }
+            ]
+          },
+          {
+            "codigo": "22",
+            "nombre": "ASUNTOS LEGALES",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE ASUNTOS LEGALES":"Baffini Fabricio Fabio"},
+            "descripcion": "Aesoraramiento jurídico al Dpto. Ejecutivo",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 248578313,
+                "reestructura": 0,
+                "comprometido": 200272778.78
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 5100000,
+                "reestructura": -3200000,
+                "comprometido": 1793252.52
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 178200000,
+                "reestructura": -128020000,
+                "comprometido": 39667991.6
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 6735421,
+                "comprometido": 3593520.01
+              }
+            ]
+          },
+          {
+            "codigo": "23",
+            "nombre": "COMUNICACIONES",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE COMUNICACIONES": "González Rocio Belén","COORDINACIÓN DE DISEÑO COMUNICACIONAL":"Bonessi Guillermo Luis"},
+            "descripcion": "Consolidar la comunicación interna y externa de la Municipalidad de General Pico, con la correspondiente difusión de acciones y actos de gobierno de todas las áreas de dicha institución.",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 104015179,
+                "reestructura": 3800000,
+                "comprometido": 93937119.4
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 5084619,
+                "reestructura": 4000000,
+                "comprometido": 7072431.91
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 182221897,
+                "reestructura": 56850000,
+                "comprometido": 183151976.92
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 3624651,
+                "comprometido": 3232075.56
+              }
+            ]
+          },
+          {
+            "codigo": "24",
+            "nombre": "MODERNIZ.E INNOV.TECNOLOGICA",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE MODERNIZACIÓN E INNOVACIÓN TECNOLÓGICA":"Bértola Macarena"},
+            "descripcion": "Analizar, diseñar e implementar los sistemas computarizados de información de la gestión municipal",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 302915484,
+                "reestructura": 0,
+                "comprometido": 283190303.75
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 34949440,
+                "reestructura": -28470000,
+                "comprometido": 6437526.94
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 139422000,
+                "reestructura": -24530000,
+                "comprometido": 88999278.5
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 8031937.02,
+                "comprometido": 8031937.02
+              }
+            ]
+          },
+          {
+            "codigo": "25",
+            "nombre": "PROTOCOLO Y CEREMONIAL",
+            "empleados": 0,
+            "funcionarios": {},
+            "descripcion": "Organización y Getión del protocolo en actos y eventos en el ámbito Municipal.",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 125565054,
+                "reestructura": 0,
+                "comprometido": 81221898.02
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 12248000,
+                "reestructura": 5000000,
+                "comprometido": 14806008.71
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 16360000,
+                "reestructura": 21900000,
+                "comprometido": 33710944.87
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 890500,
+                "comprometido": 890500
+              }
+            ]
+          },
+          {
+            "codigo": "26",
+            "nombre": "GEST.Y ADM.DE ARTICULACION",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE GESTIÓN Y ARTICULACIÓN":"LUCERO ARGUINZONIZ VIRGINIA"},
+            "descripcion": "Promover procesos permanentes de mejoramiento de procedimientos laborales y vinculación entre áreas municipales o con instituciones fuera del Municipio, Organismos Gubernamentales Povinciales o Nacionales, a los efectos de potenciar las gestiones conjuntas para la obtención de nuevos recursos de formación o económicos para la comunidad.",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 0,
+                "reestructura": 36900000,
+                "comprometido": 36808691.58
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 8260000,
+                "reestructura": -8000000,
+                "comprometido": 116510.5
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 26725000,
+                "reestructura": -12950000,
+                "comprometido": 13578670
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 3085409,
+                "comprometido": 3085408.6
+              }
+            ]
+          }
+        ]
+      },
+      "3": {
+        "codigo": "3",
+        "nombre": "GOBIERNO SEG.EDUC.Y CULTURA",
+        "direcciones": [
+          {
+            "codigo": "30",
+            "nombre": "GOBIERNO SEG.EDUC.Y CULTURA",
+            "empleados": 0,
+            "funcionarios": {"SECRETARÍA DE GOBIERNO":"Mendoza Nicolas"},
+            "descripcion": "Lograr el funcionamiento, administración y ejecución de las actividades previstas por la Secretaría de Gobierno.",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 173553335,
+                "reestructura": 344640881,
+                "comprometido": 133460007.75
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 6657917,
+                "reestructura": 3000000,
+                "comprometido": 7446489.4
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 100314262,
+                "reestructura": 770000,
+                "comprometido": 99450857.14
+              },
+              {
+                "tipo_gasto": "Z=4",
+                "codigoZ": "4",
+                "presupuestado": 187000000,
+                "reestructura": 260319000,
+                "comprometido": 372993542.77
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 654031143,
+                "reestructura": -355337203.24,
+                "comprometido": 298693938.76
+              }
+            ]
+          },
+          {
+            "codigo": "31",
+            "nombre": "RECURSOS HUMANOS",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE RECURSOS HUMANOS": "Bustos Andrea Fabiana"},
+            "descripcion": "Administración y contralor de los recursos humanos y patrimoniales de la Comuna",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 528625696,
+                "reestructura": 3000000,
+                "comprometido": 433467889.88
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 16530000,
+                "reestructura": -1800000,
+                "comprometido": 12651481.87
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 22039700,
+                "reestructura": 45180000,
+                "comprometido": 54979243
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 1259437.6,
+                "comprometido": 1259437.6
+              }
+            ]
+          },
+          {
+            "codigo": "32",
+            "nombre": "PREVENC.Y SEGURIDAD CIUDADANA",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE PREVENCIÓN Y SEGURIDAD CIUDADANA": "Viola Cristián Exequiel"},
+            "descripcion": "Tomar medidas en forma conjunta con los departamentos e interrelacionar las actividades que éstos desarrollan,con vistas a mejorar la calidad de vida de la población",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 1806987073,
+                "reestructura": 13000000,
+                "comprometido": 1536158865.08
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 230163349,
+                "reestructura": -65610000,
+                "comprometido": 162894949.4
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 713347532,
+                "reestructura": -333622700,
+                "comprometido": 297442311.35
+              },
+              {
+                "tipo_gasto": "Z=4",
+                "codigoZ": "4",
+                "presupuestado": 645000000,
+                "reestructura": 0,
+                "comprometido": 446038544.52
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 14331677.12,
+                "comprometido": 14251855.22
+              }
+            ]
+          },
+          {
+            "codigo": "33",
+            "nombre": "GESTION CULTURAL",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE GESTIÓN CULTURAL":"Rach Matias Maximiliano"},
+            "descripcion": "Administración y contralor de todas las actividades que se desarrollan en la órbita de la Dirección de Cultura y que persiguen como finalidad el desarrollo cultural de la ciudad y de sus habitantes.",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 873403589,
+                "reestructura": 0,
+                "comprometido": 595931592.09
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 197130500,
+                "reestructura": -111700000,
+                "comprometido": 84405688.42
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 635310000,
+                "reestructura": 242780000,
+                "comprometido": 731620103.14
+              },
+              {
+                "tipo_gasto": "Z=4",
+                "codigoZ": "4",
+                "presupuestado": 0,
+                "reestructura": 885000,
+                "comprometido": 885000
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 9178482.49,
+                "comprometido": 8549098.19
+              }
+            ]
+          },
+          {
+            "codigo": "34",
+            "nombre": "PARTICIP.CIUD.Y REL. INSTIT.",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE PARTICIPACIÓN CIUDADANA Y RELACIONES INSTITUCIONALES":"Gomez Somoza Alejandro Ezequiel"},
+            "descripcion": "Administración y contralor de las áreas municipales correspondientes y de las Insituciones Intermedias",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 517859380,
+                "reestructura": 0,
+                "comprometido": 382922193.24
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 16860000,
+                "reestructura": -14000000,
+                "comprometido": 2776503.1
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 215935000,
+                "reestructura": -80347589.62,
+                "comprometido": 100356490.16
+              },
+              {
+                "tipo_gasto": "Z=4",
+                "codigoZ": "4",
+                "presupuestado": 7250000,
+                "reestructura": 8000000,
+                "comprometido": 15121473.29
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 447999,
+                "comprometido": 447999
+              },
+              {
+                "tipo_gasto": "Z=6",
+                "codigoZ": "6",
+                "presupuestado": 0,
+                "reestructura": 232192599.63,
+                "comprometido": 50681816.56
+              }
+            ]
+          },
+          {
+            "codigo": "35",
+            "nombre": "DIR. DE JUVENTUD",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE JUVENTUD":"Alanis Matias Josue"},
+            "descripcion": "Proporcionar un espacio de encuentro, participación y esparcimiento, con pleno protagonismo de sus participantes",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 147359351,
+                "reestructura": 0,
+                "comprometido": 108897911.27
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 17924710,
+                "reestructura": -2500000,
+                "comprometido": 13355830.85
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 117858920,
+                "reestructura": 126522700,
+                "comprometido": 208814083.48
+              },
+              {
+                "tipo_gasto": "Z=4",
+                "codigoZ": "4",
+                "presupuestado": 30000000,
+                "reestructura": -29250000,
+                "comprometido": 750000
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 2411819.01,
+                "comprometido": 2411818.91
+              }
+            ]
+          },
+          {
+            "codigo": "36",
+            "nombre": "GERENCIA DE CHOFERES",
+            "empleados": 0,
+            "funcionarios": {},
+            "descripcion": "Administración y Gestión de los automotores destinados a la prestación de servicios al Dpto. Ejecutivo",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 517581659,
+                "reestructura": 4500000,
+                "comprometido": 385641739.31
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 19346228,
+                "reestructura": -8900000,
+                "comprometido": 9368918.86
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 23135818,
+                "reestructura": 8900000,
+                "comprometido": 27551389.67
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 622381.44,
+                "comprometido": 622381.44
+              }
+            ]
+          },
+          {
+            "codigo": "37",
+            "nombre": "DIR. DE EDUCACION",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE EDUCACIÒN": "Ramirez Gabriela Alejandra"},
+            "descripcion": "Desarrollar, Incentivar y afianzar la participación de niños,niñas, adolescentes y adultos en prácticas activas comunitarias.",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 177562297,
+                "reestructura": 0,
+                "comprometido": 129734041.33
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 40405000,
+                "reestructura": -9510000,
+                "comprometido": 30290245.52
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 64900000,
+                "reestructura": 2510000,
+                "comprometido": 58218209
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 2829158,
+                "comprometido": 2829158
+              }
+            ]
+          },
+          {
+            "codigo": "38",
+            "nombre": "DIR. DE DEPORTES",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE DEPORTE": "Lera Mariela Elizabeth"},
+            "descripcion": "Fomentar la actividad física, recreativa y deportiva, Buscando la integración a través del juego y el deporte.",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 342781732,
+                "reestructura": 0,
+                "comprometido": 258201001.16
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 67337984,
+                "reestructura": -8800000,
+                "comprometido": 48762498.99
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 227373993,
+                "reestructura": 89578799,
+                "comprometido": 265842842.97
+              },
+              {
+                "tipo_gasto": "Z=4",
+                "codigoZ": "4",
+                "presupuestado": 6937142,
+                "reestructura": 1000000,
+                "comprometido": 7278471
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 3426881.81,
+                "comprometido": 2092001.79
+              }
+            ]
+          }
+        ]
+      },
+      "4": {
+        "codigo": "4",
+        "nombre": "SEC. DE OBRAS PUBLICAS",
+        "direcciones": [
+          {
+            "codigo": "40",
+            "nombre": "SEC. DE OBRAS PUBLICAS",
+            "empleados": 0,
+            "funcionarios": {"SECRETARÍA DE OBRAS PÚBLICAS": "Gabba Jorge Carlos"},
+            "descripcion": "Ordenar y controlar el crecimiento armónico de la ciudad y el desarrollo integral del municipio, conforme a las políticas definidas por el P.E., priorizando el concepto de mejoramiento de la calidad de vida de sus habitantes.",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 103817435,
+                "reestructura": -16500000,
+                "comprometido": 63593022.34
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 5942000,
+                "reestructura": -3622204.5,
+                "comprometido": 2225049.68
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 17000000,
+                "reestructura": 5900000,
+                "comprometido": 18577728.34
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 40047000,
+                "reestructura": -24268841.97,
+                "comprometido": 15621773.97
+              },
+              {
+                "tipo_gasto": "Z=6",
+                "codigoZ": "6",
+                "presupuestado": 1375000000,
+                "reestructura": -110000000,
+                "comprometido": 322335126.21
+              },
+              {
+                "tipo_gasto": "Z=7",
+                "codigoZ": "7",
+                "presupuestado": 1300000,
+                "reestructura": 743462.6,
+                "comprometido": 2031062.24
+              }
+            ]
+          },
+          {
+            "codigo": "41",
+            "nombre": "ENTE REGULADOR DE SERV.CONS.",
+            "empleados": 0,
+            "funcionarios": {"ENTE REGULADOR DE SERVICIOS CONCESIONADOS":"Viola Horacio Alberto"},
+            "descripcion": "Controlar las prestaciones sobre concesiones de servicios públicos ejecutados por terceros",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 332516149,
+                "reestructura": 0,
+                "comprometido": 276707115.55
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 9600000,
+                "reestructura": -4200000,
+                "comprometido": 4828867.7
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 16620000,
+                "reestructura": -12900000,
+                "comprometido": 1406018.92
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 1361900,
+                "comprometido": 1361900
+              }
+            ]
+          },
+          {
+            "codigo": "42",
+            "nombre": "INFRAEST.Y OBRAS MUNICIPALES",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE INFRAESTRUCTURA Y OBRAS MUNICIPALES":"Vitali Agustin"},
+            "descripcion": "Proyección, dirección y ejecución de las obras municipales,como también mejorar la señalización y semaforización para el ordenamiento del tránsito.",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 337539492,
+                "reestructura": 5800000,
+                "comprometido": 268991189.2
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 31860000,
+                "reestructura": -400000,
+                "comprometido": 28277427.97
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 213320000,
+                "reestructura": 59272100,
+                "comprometido": 231120006.77
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 23898988.22,
+                "comprometido": 23774096.4
+              },
+              {
+                "tipo_gasto": "Z=6",
+                "codigoZ": "6",
+                "presupuestado": 1765920000,
+                "reestructura": 226822366,
+                "comprometido": 1681884499.21
+              }
+            ]
+          },
+          {
+            "codigo": "43",
+            "nombre": "OBRAS PARTICULARES",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE OBRAS PARTICULARES":"Reinhard Ariel Francisco"},
+            "descripcion": "Llevar a cabo tareas inherentes a las documentaciones catastrales y de obras de todas las construcciones del ejido urbano.",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 273059277,
+                "reestructura": 9000000,
+                "comprometido": 268570311.54
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 12558000,
+                "reestructura": 0,
+                "comprometido": 9314560.32
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 74080000,
+                "reestructura": 45170000,
+                "comprometido": 92396014.06
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 1722482.78,
+                "comprometido": 1713349.39
+              }
+            ]
+          },
+          {
+            "codigo": "44",
+            "nombre": "PLANEAM.Y CATASTRO",
+            "empleados": 0,
+            "funcionarios": {"PLANEAMIENTO Y CATASRO":"Sanchez Micaela Fabiana"},
+            "descripcion": "Llevar a cabo las actvidades necesarias con el fin de definir el planeamiento estratégico urbano de la ciudad",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 55999864,
+                "reestructura": 200000,
+                "comprometido": 49537579.04
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 2200000,
+                "reestructura": -1350000,
+                "comprometido": 437311.53
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 26320000,
+                "reestructura": 350000,
+                "comprometido": 21036000
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 14700,
+                "comprometido": 14700
+              }
+            ]
+          },
+          {
+            "codigo": "45",
+            "nombre": "DISEÑO Y PLANIFIC.",
+            "empleados": 0,
+            "funcionarios": {"DIRECCION DISEÑO Y PLANIFICACIÓN TERRITORIAL":"Villa Marcos Federico"},
+            "descripcion": "Diseño y rediseño de las plantas edilicias actuales y futuras obras que se hagan en el Municipio. Planificación territorial de la ciudad.",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 90267592,
+                "reestructura": 0,
+                "comprometido": 78417571.83
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 1484000,
+                "reestructura": -7324.5,
+                "comprometido": 1458326.47
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 31560000,
+                "reestructura": -29192571,
+                "comprometido": 2215072.5
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 714754,
+                "comprometido": 714752.08
+              }
+            ]
+          }
+        ]
+      },
+      "5": {
+        "codigo": "5",
+        "nombre": "SEC.DE AMB. Y SERV.PUB.",
+        "direcciones": [
+          {
+            "codigo": "50",
+            "nombre": "SEC.DE AMB. Y SERV.PUB.",
+            "empleados": 0,
+            "funcionarios": {"SECRETARÍA DE AMBIENTE Y SERVICIOS PÚBLICOS":"Adamo Sebastián Victor Guillermo"},
+            "descripcion": "Lograr mayores y mejores niveles de calidad en la gestión de trámites relacionados con los servicios públicos brindados al vecino, en pos de la preservación de la higiene y salubridad medio-ambiente",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 724840623,
+                "reestructura": 573354399.79,
+                "comprometido": 504688549.42
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 1156643500,
+                "reestructura": -585130717,
+                "comprometido": 524495980.47
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 126979000,
+                "reestructura": 180500000,
+                "comprometido": 185774241.14
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 814684697,
+                "reestructura": -659835898.53,
+                "comprometido": 154848798.37
+              }
+            ]
+          },
+          {
+            "codigo": "51",
+            "nombre": "AMBIENTE Y DESAR.SUSTENTABLE",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN GENERAL DE AMBIENTE Y DESARROLLO SUSTENTABLE":"Medus Melina"},
+            "descripcion": "Mejorar la calidad de vida de la población actuando sobre nuestro medio ambiente.",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 720538955,
+                "reestructura": -100000,
+                "comprometido": 348781163.72
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 17970000,
+                "reestructura": -13000000,
+                "comprometido": 4064910.24
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 75475000,
+                "reestructura": -26500000,
+                "comprometido": 39138988.69
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 1031849.45,
+                "comprometido": 1031849.45
+              }
+            ]
+          },
+          {
+            "codigo": "52",
+            "nombre": "SERVICIOS PUBLICOS",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE SERVICIOS PÚBLICOS": "Quintin Walter Dario"},
+            "descripcion": "Realizar las tareas necesarias a fin de mantener y conservar las calles de la ciudad. Recolección residuos especial y domiciliaria y limpieza de canales pluviales",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 2177024466,
+                "reestructura": -200000,
+                "comprometido": 1700959040.41
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 301168613,
+                "reestructura": -74500000,
+                "comprometido": 223605378.52
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 540737571,
+                "reestructura": 146200000,
+                "comprometido": 653144206.92
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 22522864.8,
+                "comprometido": 22329689.61
+              }
+            ]
+          },
+          {
+            "codigo": "53",
+            "nombre": "DIR.ARBOLADO Y PARQUES URBANOS",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE ARBOLADO Y PARQUES URBANOS":"Belliardo Lucas Adrian"},
+            "descripcion": "Implementar los proyectos en espacios verdes destinados a la receación pasiva, complementando una línea de acción destinada a dotar de insfraestructura necesaria para tal fin.",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 552120957,
+                "reestructura": 0,
+                "comprometido": 485818979.01
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 150860660,
+                "reestructura": -27300000,
+                "comprometido": 101664220.2
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 611840000,
+                "reestructura": 444800000,
+                "comprometido": 987810058.53
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 36190224.73,
+                "comprometido": 36190223.58
+              }
+            ]
+          },
+          {
+            "codigo": "54",
+            "nombre": "DIR.ZOONOSIS Y VECTORES",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE ZOONOSIS Y VECTORES":"Calmels Matias Alejandro"},
+            "descripcion": "Mejorar la calidad de vida de la población actuando sobre las enfermedades que puedan transmitir los animales",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 129527069,
+                "reestructura": 27000000,
+                "comprometido": 144546070.25
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 50700000,
+                "reestructura": -14700000,
+                "comprometido": 31518552.87
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 292338870,
+                "reestructura": -6000000,
+                "comprometido": 218634785.07
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 4205560.68,
+                "comprometido": 4205556.75
+              }
+            ]
+          },
+          {
+            "codigo": "55",
+            "nombre": "RRU -RECICLADO RESID.URBANOS-",
+            "empleados": 0,
+            "funcionarios": {"RRU & GIRSU": "Acosta Adrian Matias"},
+            "descripcion": "Reciclar los Residuos de la Ciudad",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 670800000,
+                "reestructura": -139200000,
+                "comprometido": 377106220
+              }
+            ]
+          },
+          {
+            "codigo": "56",
+            "nombre": "DIR.GIRSU",
+            "empleados": 0,
+            "funcionarios": {"RRU & GIRSU": "Acosta Adrian Matias"},
+            "descripcion": "Lograr mayores y mejores niveles de calidad en la gestión de trámites relacionados con los servicios públicos brindados al vecino, en pos de la preservación  de la higiene y salubridad medio-ambiente",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 2920267781,
+                "reestructura": 3000000,
+                "comprometido": 2422867201.96
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 173335878,
+                "reestructura": -17600000,
+                "comprometido": 148879009.73
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 107450429,
+                "reestructura": 254600000,
+                "comprometido": 359290422.89
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 9247729.36,
+                "comprometido": 8809128.86
+              }
+            ]
+          }
+        ]
+      },
+      "6": {
+        "codigo": "6",
+        "nombre": "SEC.DE DESAROLLO SOCIAL",
+        "direcciones": [
+          {
+            "codigo": "60",
+            "nombre": "SEC.DE DESAROLLO SOCIAL",
+            "empleados": 0,
+            "funcionarios": {"SECRETARÍA DE DESARROLLO SOCIAL":"Luna Echegaray Gabriela Anahi"},
+            "descripcion": "Realizar la gestión estratégica de la Secretaría estableciendo objetivos y prioridades",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 377220447,
+                "reestructura": 43063667.99,
+                "comprometido": 243913983.4
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 27900000,
+                "reestructura": 169200000,
+                "comprometido": 155185483.49
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 183200000,
+                "reestructura": 93800000,
+                "comprometido": 261252238.6
+              },
+              {
+                "tipo_gasto": "Z=4",
+                "codigoZ": "4",
+                "presupuestado": 1659300000,
+                "reestructura": -334563470.6,
+                "comprometido": 974674052.19
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 225000000,
+                "reestructura": -204034721.5,
+                "comprometido": 20965278.5
+              }
+            ]
+          },
+          {
+            "codigo": "61",
+            "nombre": "DIR.DE FAMILIA",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE FAMILIA":"Perez Santillan Ivana Jesica"},
+            "descripcion": "Desarrollar programas de prevención y promoción social,destinados a toda la población, minimizando los factores de riesgo a que están expuestos los sectores más vulnerables de la sociedad",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 1045870797,
+                "reestructura": -200000,
+                "comprometido": 798857684.13
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 27780400,
+                "reestructura": -11461636,
+                "comprometido": 13304785.94
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 237100000,
+                "reestructura": 11509500,
+                "comprometido": 198016967.19
+              },
+              {
+                "tipo_gasto": "Z=4",
+                "codigoZ": "4",
+                "presupuestado": 25800000,
+                "reestructura": 30187000,
+                "comprometido": 53711385
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 1221873.56,
+                "comprometido": 1221873.56
+              }
+            ]
+          },
+          {
+            "codigo": "62",
+            "nombre": "CETROS.DE DESARROLLO INFANTIL",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE FAMILIA":"Perez Santillan Ivana Jesica"},
+            "descripcion": "Atender las necesidades nutricionales de niños y ofrecer un servicio educativo-social que ",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 780436549,
+                "reestructura": 0,
+                "comprometido": 524881353.37
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 184800000,
+                "reestructura": -73026200,
+                "comprometido": 65952578.75
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 272300000,
+                "reestructura": 34439168,
+                "comprometido": 250779416.37
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 20531683.79,
+                "comprometido": 20531683.79
+              }
+            ]
+          },
+          {
+            "codigo": "63",
+            "nombre": "DIR. DESARROLLO COMUNITARIO",
+            "empleados": 0,
+            "funcionarios": {"COORDINACIÓN DE CENTROS DE DESARROLLO TERRITORIAL":"Romero Maria Silvina"},
+           
+            "descripcion": "",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 1205495363,
+                "reestructura": 200000,
+                "comprometido": 845048598.03
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 20000000,
+                "reestructura": 725871,
+                "comprometido": 20101934.07
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 93390000,
+                "reestructura": 65900000,
+                "comprometido": 126493791.91
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 14986312.85,
+                "comprometido": 14986311.76
+              }
+            ]
+          },
+          {
+            "codigo": "64",
+            "nombre": "UNIDAD LOCAL DE NIÑEZ",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN UNIDAD LOCAL DE NIÑEZ":"Hubert Gabriela Ines","":"Vargas Patricia Belen"},
+            "descripcion": "",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 407124253,
+                "reestructura": 14600000,
+                "comprometido": 327467549.82
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 13570000,
+                "reestructura": 3000000,
+                "comprometido": 8394858.9
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 164818143,
+                "reestructura": 77300000,
+                "comprometido": 191083141.18
+              },
+              {
+                "tipo_gasto": "Z=4",
+                "codigoZ": "4",
+                "presupuestado": 700000,
+                "reestructura": 8864690.6,
+                "comprometido": 9446280.76
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 8608683.05,
+                "comprometido": 8608682.83
+              }
+            ]
+          },
+          {
+            "codigo": "65",
+            "nombre": "POLITICAS DE GENERO",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE POLÍTICAS DE GÉNERO":"Garrido Carina Alejandra"},
+            "descripcion": "",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 109612439,
+                "reestructura": 29500000,
+                "comprometido": 129132878.44
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 19940500,
+                "reestructura": 4516500,
+                "comprometido": 16484243.99
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 42550000,
+                "reestructura": 0,
+                "comprometido": 40293643.89
+              },
+              {
+                "tipo_gasto": "Z=4",
+                "codigoZ": "4",
+                "presupuestado": 0,
+                "reestructura": 111300,
+                "comprometido": 111300
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 6792779.2,
+                "comprometido": 6722778.78
+              }
+            ]
+          },
+          {
+            "codigo": "66",
+            "nombre": "DIR. DE ARTICULAC. TERRITORIAL",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE ARTICULACIÓN TERRITORIAL":"Sanchez Graciela Adriana"},
+            "descripcion": "",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 0,
+                "reestructura": 56800000,
+                "comprometido": 50918257.09
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 17600000,
+                "reestructura": -16400000,
+                "comprometido": 874860
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 18500000,
+                "reestructura": -7000000,
+                "comprometido": 3676994
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 7367877.35,
+                "comprometido": 7367877.22
+              }
+            ]
+          }
+        ]
+      },
+      "7": {
+        "codigo": "7",
+        "nombre": "SEC.DE ECONOMIA",
+        "direcciones": [
+          {
+            "codigo": "70",
+            "nombre": "SEC.DE ECONOMIA",
+            "empleados": 0,
+            "funcionarios": {"SECRETARÍA DE ECONOMÍA":"Anconetani Luis Alberto"},
+            "descripcion": "",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 116718714,
+                "reestructura": 127460545.52,
+                "comprometido": 108812338.27
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 5905230,
+                "reestructura": -3800000,
+                "comprometido": 1609443.52
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 88443859,
+                "reestructura": 39500000,
+                "comprometido": 97536509.34
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 176297704,
+                "reestructura": -154322577.68,
+                "comprometido": 17139115.48
+              }
+            ]
+          },
+          {
+            "codigo": "71",
+            "nombre": "CONTADURIA GENERAL",
+            "empleados": 0,
+            "funcionarios": {"CONTADURÍA GENERAL":"Medina Martin Alfredo","DIRECCIÓN DE CONTROL INTERNO Y AUDITORÍA":"Ferraro Luis Eduardo"},
+            "descripcion": "",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 584078203,
+                "reestructura": 4000000,
+                "comprometido": 429149862.27
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 43046714,
+                "reestructura": -21700000,
+                "comprometido": 17526128.75
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 53394089,
+                "reestructura": 25000000,
+                "comprometido": 54278976.4
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 2184755.05,
+                "comprometido": 2184755.05
+              }
+            ]
+          },
+          {
+            "codigo": "72",
+            "nombre": "RENTAS",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE RENTAS":"Irrazabal Juan Cruz"},
+            "descripcion": "",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 517584185,
+                "reestructura": 1500000,
+                "comprometido": 405603018.51
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 37734496,
+                "reestructura": 0,
+                "comprometido": 27692244.96
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 204466810,
+                "reestructura": 101500000,
+                "comprometido": 239852002.63
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 3726388.17,
+                "comprometido": 3673161.22
+              }
+            ]
+          },
+          {
+            "codigo": "73",
+            "nombre": "DIR. COMERCIO",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE COMERCIO":"Maidana Andres Esteban"},
+            "descripcion": "",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 843371760,
+                "reestructura": 1000000,
+                "comprometido": 632574424.2
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 6849570,
+                "reestructura": 5550000,
+                "comprometido": 12310820.7
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 43304690,
+                "reestructura": 19850000,
+                "comprometido": 54208378.26
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 5544828.52,
+                "comprometido": 5544828.03
+              }
+            ]
+          },
+          {
+            "codigo": "74",
+            "nombre": "DES.ECONOM.Y PRODUCT.",
+            "empleados": 0,
+            "funcionarios": {"DIRECCIÓN DE DESARROLLO ECONÓMICO Y PRODUCTIVO":"Carrizo Yolanda Miriam","COORDINACIÓN DE NUEVAS ECONOMÍAS Y EMPRENDEDURISMO":"Muñoz Melina","COORDINACIÓN DE DESARROLLO LOCAL Y TURISMO":"Robledo Maximiliano"},
+            "descripcion": "",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 662935676,
+                "reestructura": 2000000,
+                "comprometido": 586355164.45
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 117115000,
+                "reestructura": -73047800,
+                "comprometido": 35034893.46
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 362096000,
+                "reestructura": -55222366,
+                "comprometido": 228247724.57
+              },
+              {
+                "tipo_gasto": "Z=4",
+                "codigoZ": "4",
+                "presupuestado": 110200000,
+                "reestructura": 0,
+                "comprometido": 55660362.13
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 5719088.9,
+                "comprometido": 5137273.07
+              },
+              {
+                "tipo_gasto": "Z=7",
+                "codigoZ": "7",
+                "presupuestado": 117000000,
+                "reestructura": 0,
+                "comprometido": 36950545.71
+              }
+            ]
+          },
+          {
+            "codigo": "75",
+            "nombre": "TESORERIA",
+            "empleados": 0,
+            "funcionarios": {"TESORERÍA":"Aragona Hernan Gustavo"},
+            "descripcion": "",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 303330659,
+                "reestructura": 0,
+                "comprometido": 271647825.46
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 8009612,
+                "reestructura": 0,
+                "comprometido": 7545969.12
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 58196896,
+                "reestructura": 41000000,
+                "comprometido": 77938234.41
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 0,
+                "reestructura": 5042271.52,
+                "comprometido": 5042270.78
+              }
+            ]
+          }
+        ]
+      },
+      "8": {
+        "codigo": "8",
+        "nombre": "ORGANISMOS DESCENTRALIZADOS",
+        "direcciones": [
+          {
+            "codigo": "80",
+            "nombre": "PLANTA DE ASFALTO",
+            "empleados": 0,
+            "funcionarios": {"ORGANISMO DESCENTRALIZADO DE PLANTA DE ASFALTO":"Garro Diego Nicolas"},
+            "descripcion": "",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 641209431,
+                "reestructura": 0,
+                "comprometido": 545031557.62
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 297600000,
+                "reestructura": 12000000,
+                "comprometido": 299722938.73
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 153600000,
+                "reestructura": 11000000,
+                "comprometido": 161242787.14
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 160000000,
+                "reestructura": -53789560.83,
+                "comprometido": 1020000.04
+              }
+            ]
+          },
+          {
+            "codigo": "81",
+            "nombre": "CAMINOS VECINALES",
+            "empleados": 0,
+            "funcionarios": {"ORGANISMO DESCENTRALIZADO CAMINOS VECINALES":"Balbidare Dario German"},
+            "descripcion": "",
+            "gastos": [
+              {
+                "tipo_gasto": "Z=1",
+                "codigoZ": "1",
+                "presupuestado": 95719155,
+                "reestructura": 0,
+                "comprometido": 70111643.62
+              },
+              {
+                "tipo_gasto": "Z=2",
+                "codigoZ": "2",
+                "presupuestado": 130000000,
+                "reestructura": -40000000,
+                "comprometido": 76973778.93
+              },
+              {
+                "tipo_gasto": "Z=3",
+                "codigoZ": "3",
+                "presupuestado": 85760000,
+                "reestructura": -47000000,
+                "comprometido": 29366031.46
+              },
+              {
+                "tipo_gasto": "Z=5",
+                "codigoZ": "5",
+                "presupuestado": 240000000,
+                "reestructura": -15297132.41,
+                "comprometido": 202032307.06
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }

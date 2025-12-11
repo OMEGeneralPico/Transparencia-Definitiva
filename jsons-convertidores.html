@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Generar JSON — versión robusta</title>
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<style>
+body{font-family:Arial;padding:16px}
+textarea{width:100%;height:300px}
+.row{display:flex;gap:8px;margin-bottom:8px}
+</style>
+</head>
+<body>
+<h3>Generar JSON — lector robusto (por XY → Z)</h3>
+<div class="row">
+  <input id="file" type="file" accept=".xlsx,.xls" />
+  <input id="periodo" placeholder="Periodo (ej: 2do sem 2025)" style="flex:1" />
+  <button id="btn">Procesar</button>
+  <button id="dl" disabled>Descargar JSON</button>
+</div>
+<div>
+  <small>Se leerán hojas desde la 2ª en adelante. Revisa la consola para debug.</small>
+</div>
+<h4>Output JSON</h4>
+<textarea id="out" readonly></textarea>
+
+<script>
+    // ---------- util: parseo numérico robusto ----------
+    function parseRobusto(v){
+      if(v === undefined || v === null || v === "") return 0;
+      if(typeof v === 'number' && !isNaN(v)) return Math.round(v*100)/100;
+    
+      let s = String(v).trim();
+      s = s.replace(/\u00A0/g, ''); 
+      s = s.replace(/\s+/g,'');
+    
+      let negative = false;
+      if(s.startsWith('(') && s.endsWith(')')){
+          negative = true;
+          s = s.slice(1,-1);
+      }
+    
+      s = s.replace(/[^0-9\.,eE\+\-]/g, '');
+    
+      if(/[eE]/.test(s)){
+          const n = Number(s);
+          if(!isNaN(n)) return (Math.round(n*100)/100) * (negative?-1:1);
+      }
+    
+      const dots = (s.match(/\./g)||[]).length;
+      const comms = (s.match(/,/g)||[]).length;
+    
+      if(dots>0 && comms>0){
+          s = s.replace(/\./g,'').replace(',', '.');
+      } else if(comms>0 && dots===0){
+          s = s.replace(',', '.');
+      } else if(dots>0 && comms===0){
+          const last = s.split('.').pop();
+          if(last.length === 3){
+              s = s.replace(/\./g,'');
+          }
+      }
+    
+      s = s.replace(/-+/g,'-');
+    
+      const n = Number(s);
+      if(isNaN(n)) return 0;
+      return Math.round(n*100)/100 * (negative?-1:1);
+    }
+    
+    function rcToA1(r,c){
+        return XLSX.utils.encode_cell({r:r,c:c});
+    }
+    
+    function getCellValue(ws, r, c){
+        const ref = rcToA1(r,c);
+        const cell = ws[ref];
+        if(!cell) return null;
+        if(cell.t === 'n') return Number(cell.v);
+        return parseRobusto(cell.v);
+    }
+    
+    
+    // ---------- procesamiento ----------
+    document.getElementById('btn').addEventListener('click', ()=>{
+    
+      const f = document.getElementById('file').files[0];
+      if(!f){ alert("Elegí un Excel"); return; }
+    
+      const reader = new FileReader();
+      reader.onload = function(e){
+        const data = new Uint8Array(e.target.result);
+        const wb = XLSX.read(data, {type:'array'});
+    
+        const salida = { 
+            periodo: document.getElementById('periodo').value || "Sin nombre", 
+            secretarias: {} 
+        };
+    
+        const sheets = wb.SheetNames;
+    
+        for(let s=1; s<sheets.length; s++){
+          const nombreHoja = sheets[s];
+          const ws = wb.Sheets[nombreHoja];
+          if(!ws) continue;
+    
+          const range = ws['!ref'];
+          if(!range) continue;
+          const decoded = XLSX.utils.decode_range(range);
+          const r0 = decoded.s.r, rLast = decoded.e.r;
+    
+          // ---- NOMBRE EXACTO DE LA DIRECCIÓN: A2 ----
+          let nombreDireccionHoja = null;
+          const celdaA2 = ws[rcToA1(1,0)];
+          if(celdaA2 && celdaA2.v !== undefined && celdaA2.v !== null){
+              const raw = String(celdaA2.v).trim();
+              if(raw !== "") nombreDireccionHoja = raw;
+          }
+    
+          // ---- recorrer filas ----
+          for(let r = r0+1; r <= rLast; r++){
+    
+            const Araw = getCellValue(ws, r, 0);
+            const Braw = (() => {
+              const cell = ws[rcToA1(r,1)];
+              if(!cell) return null;
+              if(cell.t === 'n') return String(cell.v).replace(/\.0+$/, '');
+              return (cell.v===undefined || cell.v===null) ? null : String(cell.v);
+            })();
+            const Craw = getCellValue(ws, r, 2);
+            const Draw = getCellValue(ws, r, 3);
+            const Eraw = getCellValue(ws, r, 4);
+            const Rraw = getCellValue(ws, r, 17);
+    
+            if(!Braw) continue;
+            const partida = String(Braw).replace(/\s+/g,'');
+            if(partida.length < 3) continue;
+    
+            const X = partida.charAt(0);
+            const Y = partida.charAt(1);
+            const Z = partida.charAt(2);
+    
+            const codigoSec = X;
+            const codigoDir = X+Y;
+    
+            const D = (Draw===null? 0:Number(Draw));
+            const E = (Eraw===null? 0:Number(Eraw));
+            const R = (Rraw===null? 0:Number(Rraw));
+    
+            // ---- Asegurar Secretaría ----
+            if(!salida.secretarias[codigoSec]){
+                salida.secretarias[codigoSec] = {
+                    codigo: codigoSec,
+                    nombre: null,
+                    direcciones: {}
+                };
+            }
+    
+            if(Y === '0' && Araw && !salida.secretarias[codigoSec].nombre){
+                salida.secretarias[codigoSec].nombre = String(Araw);
+            }
+    
+            // ---- Asegurar Dirección (USAR SOLO A2 COMO NOMBRE) ----
+            if(!salida.secretarias[codigoSec].direcciones[codigoDir]){
+                salida.secretarias[codigoSec].direcciones[codigoDir] = {
+                    codigo: codigoDir,
+                    // NOMBRE: SIEMPRE A2; si A2 vacío → fallback a "Dirección XY"
+                    nombre: nombreDireccionHoja || ("Dirección " + codigoDir),
+                    empleados: 0,
+                    funcionarios: {},
+                    descripcion: "",
+                    gastos: {}
+                };
+            }
+    
+            const dirObj = salida.secretarias[codigoSec].direcciones[codigoDir];
+    
+            if(!dirObj.gastos[Z]){
+                dirObj.gastos[Z] = {
+                    codigoZ: Z,
+                    tipo_gasto: Craw || ("Z="+Z),
+                    presupuestado: 0,
+                    reestructura: 0,
+                    comprometido: 0
+                };
+            }
+    
+            dirObj.gastos[Z].presupuestado += Number(D)||0;
+            dirObj.gastos[Z].reestructura += Number(E)||0;
+            dirObj.gastos[Z].comprometido += Number(R)||0;
+          }
+        }
+    
+        // ---- Completar nombres de secretaría si faltan ----
+        Object.keys(salida.secretarias).forEach(secK=>{
+          const sec = salida.secretarias[secK];
+          if(!sec.nombre){
+              let found = null;
+              Object.values(sec.direcciones).forEach(d=>{
+                  if(d.codigo.charAt(1)==='0' && d.nombre) found = d.nombre;
+              });
+              sec.nombre = found || ("Secretaría "+sec.codigo);
+          }
+        });
+    
+        // ---- Convertir objetos a arrays y redondear ----
+        Object.keys(salida.secretarias).forEach(secK=>{
+          const sec = salida.secretarias[secK];
+          const dirsObj = sec.direcciones || {};
+          sec.direcciones = Object.keys(dirsObj).sort().map(k=>{
+            const d = dirsObj[k];
+            const gastosArr = Object.keys(d.gastos).sort().map(z=>{
+              const g = d.gastos[z];
+              return {
+                tipo_gasto: g.tipo_gasto,
+                codigoZ: g.codigoZ,
+                presupuestado: Math.round((g.presupuestado||0)*100)/100,
+                reestructura: Math.round((g.reestructura||0)*100)/100,
+                comprometido: Math.round((g.comprometido||0)*100)/100
+              };
+            });
+            return {
+              codigo: d.codigo,
+              nombre: d.nombre,
+              empleados: d.empleados,
+              funcionarios: d.funcionarios,
+              descripcion: d.descripcion,
+              gastos: gastosArr
+            };
+          });
+        });
+    
+        const outStr = JSON.stringify(salida,null,2);
+        document.getElementById('out').value = outStr;
+    
+        const dl = document.getElementById('dl');
+        dl.disabled = false;
+        dl.dataset.json = outStr;
+      };
+    
+      reader.readAsArrayBuffer(f);
+    });
+    
+    document.getElementById('dl').addEventListener('click', function(){
+      const j = this.dataset.json;
+      if(!j) return;
+      const blob = new Blob([j], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = "presupuesto_generado.json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+    </script>
+    
+
+</body>
+</html>
