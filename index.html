@@ -2,279 +2,139 @@
 <html lang="es">
 
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Transparencia Municipal</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transparencia Municipal</title>
 
-<!-- Materialize -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<style>
+    <style>
+        /* GENERAL */
+        html, body {
+            margin: 0; padding: 0; height: 100vh;
+            background: #f5f5f5; font-family: "Roboto", sans-serif;
+            overflow-x: hidden;
+        }
 
-/* GENERAL */
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    overflow: hidden;
-    background: #f5f5f5;
-    font-family: "Roboto", sans-serif;
-}
+        /* NAVBAR SUPERIOR */
+        #top-navbar {
+            background: #1b5e20; height: 64px; 
+            display: flex; align-items: center;
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 0 15px;
+        }
+        #top-navbar img { height: 45px; margin-left: 10px; }
+        .sidenav-trigger { color: white !important; display: block; }
 
-/* NAVBAR SUPERIOR */
-#top-navbar {
-    background: #1b5e20;
-    height: 64px;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-}
+        /* LAYOUT */
+        #layout { padding-top: 64px; display: flex; }
 
-#top-navbar img {
-    height: 50px;
-    opacity: 0.9;
-}
+        /* SIDEBAR / SIDENAV */
+        .sidenav {
+            background: #1b5e20; color: white;
+            padding-top: 20px; width: 280px;
+        }
+        .sidebar-title { padding: 14px 20px; font-size: 15px; font-weight: bold; color: rgba(255,255,255,0.8); text-transform: uppercase; }
+        .collapsible-header { background: transparent !important; color: white !important; border: 0 !important; padding-left: 45px !important; }
+        .collection-item { background: #1b5e20 !important; color: white !important; border: 0 !important; cursor: pointer; padding-left: 50px !important; }
+        .collection-item:hover { background: rgba(255,255,255,0.1) !important; }
 
-/* LAYOUT */
-#layout {
-    display: grid;
-    grid-template-columns: 260px auto;
-    height: calc(100vh - 64px);
-}
+        /* MAIN CONTENT */
+        #main {
+            flex-grow: 1;
+            padding-left: 280px; /* Ajustado al ancho exacto del sidenav */
+            width: 100%;
+        }
 
-/* SIDEBAR */
-#sidebar {
-    background: #1b5e20;
-    color: white;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-}
+        @media (max-width: 992px) {
+            #main { padding-left: 0; }
+        }
 
-.sidebar-title {
-    padding: 14px 20px;
-    font-size: 15px;
-    font-weight: bold;
-    color: #fff;
-}
+        /* TABS & SCROLLBAR PERSONALIZADO */
+        .tabs { 
+            background: #4a148c !important; 
+            margin: 0 !important; 
+            width: 100% !important;
+            border-radius: 0 !important;
+            height: 48px !important;
+        }
+        
+        /* Estilo de la barra de scroll */
+        .tabs::-webkit-scrollbar { 
+            height: 6px; /* Un poquito más gruesa para que se vea el diseño */
+        }
+        .tabs::-webkit-scrollbar-track { 
+            background: rgba(255, 255, 255, 0.15); /* Fondo blanco translúcido visible */
+        }
+        .tabs::-webkit-scrollbar-thumb { 
+            background: red; /* Barra blanca sólida */
+            border-radius: 10px;
+        }
 
-/* Collapsible */
-.collapsible-header {
-    background: #1b5e20 !important;
-    color: white !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-}
+        .tabs .tab a { color: rgba(255,255,255,0.7) !important; }
+        .tabs .tab a.active { background: rgba(255,255,255,0.2) !important; color: white !important; }
+        .tabs .indicator { background-color: white !important; }
 
-#semestre-dropdown a,
-#secretarias-list li {
-    color: white !important;
-    padding: 10px 20px;
-    display: block;
-    cursor: pointer;
-}
+        /* BENTO GRID */
+        #direccion-content { padding: 15px; }
+        .bento-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        @media (min-width: 601px) {
+            .bento-grid { grid-template-columns: 1fr 1fr; }
+            #progress-card { grid-column: span 2; }
+        }
 
-#secretarias-list li:hover,
-#semestre-dropdown a:hover {
-    background: rgba(255,255,255,0.1);
-}
+        .bento-item { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        #grafico-card { min-height: 320px; }
 
-#logo-pie {
-    padding: 20px;
-    text-align: center;
-}
+        /* PROGRESS BARS */
+        .progress-title { font-size: 13px; margin-bottom: 5px; font-weight: 500; }
+        .progress { height: 16px; background-color: #e0e0e0; border-radius: 8px; margin-bottom: 12px; }
+        .progress .determinate { border-radius: 8px; background-color: #4a148c !important; }
 
-/* MAIN */
-#main {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.tabs {
-    background: #4a148c !important;
-    display: flex !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    white-space: nowrap !important;
-    width: 100% !important;
-}
-
-.tabs .tab {
-    display: inline-flex !important;
-    flex: 0 0 auto !important;
-    min-width: max-content !important;
-}
-
-.tabs .tab a {
-    color: white !important;
-    font-size: 13px !important;
-    padding: 0 20px !important;
-    text-transform: uppercase !important;
-    height: 48px !important;
-    line-height: 48px !important;
-    display: flex !important;
-    align-items: center !important;
-}
-
-.tabs .tab a.active {
-    background: rgba(255,255,255,0.2) !important;
-}
-#sidebar {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
-#sidebar .sidebar-content {
-    flex: 1;
-    overflow-y: auto;
-}
-
-#sidebar .logo-final {
-    padding: 20px;
-    text-align: center;
-}
-
-
-#sidebar::-webkit-scrollbar {
-    width: 8px;
-}
-
-#sidebar::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-#sidebar::-webkit-scrollbar-thumb {
-    background: white;
-    border-radius: 4px;
-}
-.collapsible-header {
-    position: relative;
-    padding-left: 40px !important;
-}
-
-.collapsible-header::before {
-    content: "▸";
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 14px;
-    transition: transform 0.2s;
-}
-
-li.active .collapsible-header::before {
-    transform: translateY(-50%) rotate(90deg);
-}
-
-/* BENTO GRID */
-#direccion-content {
-    flex-grow: 1;
-    padding: 12px;
-    overflow: hidden;
-}
-
-.bento-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: 1fr 1fr auto;
-    gap: 12px;
-    height: 100%;
-}
-
-.bento-item {
-    background: white;
-    border-radius: 10px;
-    padding: 12px;
-    overflow: hidden;
-}
-
-#funcionarios-card { overflow-y: auto; }
-#grafico-card { position: relative; }
-
-/* Progress Bars */
-#progress-card {
-    grid-column: span 2;
-    overflow-y: auto;
-}
-
-.progress-title {
-    font-size: 13px;
-    margin-bottom: 2px;
-}
-
-.progress {
-    height: 18px;
-    background-color: #e0e0e0;
-    border-radius: 9px;
-    margin-bottom: 10px;
-}
-.progress .determinate {
-    border-radius: 9px;
-    background-color: #4a148c !important;
-}
+        #logo-final { text-align: center; padding: 20px; margin-top: 30px; }
 </style>
-
 </head>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        M.AutoInit();
-    });
-    </script>
+
 <body>
 
-    <!-- NAVBAR SUPERIOR -->
-    <div id="top-navbar" >
-        <img src="imagenes/pico.png"  alt="Logo Municipal">
-    </div>
-    
-    <!-- LAYOUT PRINCIPAL -->
+    <nav id="top-navbar">
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <img src="imagenes/pico.png" alt="Logo">
+    </nav>
+
     <div id="layout">
-    
-        <!-- SIDEBAR -->
-        <div id="sidebar">
-    
+        <ul id="slide-out" class="sidenav sidenav-fixed">
             <div class="sidebar-title">Semestres</div>
-    
-            <!-- COLLAPSIBLE POR SEMESTRE -->
-            <ul class="collapsible" id="semestres-collapsible" style="border:0; box-shadow:none; margin:0;">
-                <!-- Aquí se cargan dinámicamente los semestres + secretarías -->
-            </ul>
-    
-            <div class="sidebar-title">Años</div>
-            <a class="modal-trigger" href="#modal-anios" style="padding-left:20px;">Años anteriores</a>
-    
+            <ul class="collapsible collapsible-accordion" id="semestres-collapsible">
+                </ul>
+            <div class="divider" style="background:rgba(255,255,255,0.1)"></div>
+            <div class="sidebar-title">Opciones</div>
+            <li><a class="modal-trigger white-text" href="#modal-anios"><i class="material-icons left white-text">calendar_today</i>Años anteriores</a></li>
             <div id="logo-final">
-                <img src="imagenes/ome.png" style="width:40%; opacity:0.9;">
+                <img src="imagenes/ome.png" style="width:50%; opacity:0.8;">
             </div>
-        </div>
-    
-        <!-- MAIN -->
-        <div id="main">
-    
-            <!-- TABS DE DIRECCIONES -->
-            <ul class="tabs" id="direcciones-tabs"></ul>
-    
-            <!-- CONTENIDO DIRECCIÓN -->
+        </ul>
+
+        <main id="main">
+            <div class="hide-on-large-only" style="padding: 10px; background: #fff;">
+                <label>Dirección:</label>
+                <select id="direcciones-select" class="browser-default" style="border:1px solid #4a148c; padding:8px; border-radius:4px;"></select>
+            </div>
+
+            <ul class="tabs hide-on-med-and-down" id="direcciones-tabs"></ul>
+
             <div id="direccion-content">
                 <div class="bento-grid">
-    
-                    <!-- Funcionarios -->
                     <div class="bento-item" id="funcionarios-card">
-                        <div id="func-list">Seleccione una Dirección</div>
+                        <div id="func-list">Seleccione una secretaría en el menú.</div>
                     </div>
-    
-                    <!-- Gráfico -->
                     <div class="bento-item" id="grafico-card">
                         <canvas id="chart-actual"></canvas>
                     </div>
-    
-                    <!-- Progress Bars -->
                     <div class="bento-item" id="progress-card">
                         <div id="progress-container">
                             <div><div class="progress-title">1 - Gastos en Personal</div><div class="progress"><div class="determinate"></div></div></div>
@@ -286,253 +146,158 @@ li.active .collapsible-header::before {
                             <div><div class="progress-title">7 - Créditos</div><div class="progress"><div class="determinate"></div></div></div>
                         </div>
                     </div>
-    
                 </div>
             </div>
-    
-        </div>
+        </main>
     </div>
-    
-    <!-- MODAL AÑOS ANTERIORES -->
+
     <div id="modal-anios" class="modal">
         <div class="modal-content">
-            <h4>Años disponibles</h4>
-            <div id="lista-anios"></div>
+            <h4>Seleccionar Año</h4>
+            <div id="lista-anios" class="collection"></div>
         </div>
     </div>
-    
-    <!-- ================================
-             SCRIPT PRINCIPAL
-    ================================ -->
- 
-    
-    </body>
+
     <script>
-    
         document.addEventListener("DOMContentLoaded", function () {
-        
-            M.Collapsible.init(document.querySelectorAll('.collapsible'));
+            // Inicialización de Materialize
+            M.Sidenav.init(document.querySelectorAll('.sidenav'));
             M.Modal.init(document.querySelectorAll('.modal'));
-        
+            
             let dataGlobal = null;
             let YEAR_SELECTED = null;
-            let SEMESTRE_SELECTED = null;
             let chartInstance = null;
-        
             const Z_MAPPING = { "Z=1": 0, "Z=2": 1, "Z=3": 2, "Z=4": 3, "Z=5": 4, "Z=6": 5, "Z=7": 6 };
-        
-            /* Guardamos los títulos originales */
-            const PROGRESS_TITLES = [];
-            document.querySelectorAll('#progress-container .progress-title')
-                .forEach(t => PROGRESS_TITLES.push(t.textContent));
-        
-            /* Cargar JSON */
+            const PROGRESS_TITLES = Array.from(document.querySelectorAll('#progress-container .progress-title')).map(t => t.innerText.split('—')[0].trim());
+
             fetch("presupuesto.json")
                 .then(r => r.json())
-                .then(data => iniciarSistema(data))
-                .catch(err => console.error("Error cargando JSON:", err));
-        
-            /* ================================
-                      INICIO SISTEMA
-               ================================ */
-            function iniciarSistema(data) {
-                dataGlobal = data;
-        
-                // Año por defecto → el primero del JSON
-                YEAR_SELECTED = Object.keys(dataGlobal)[0];
-        
-                cargarModalAnios();
-                cargarSemestresSidebar();
-            }
-        
-            /* ================================
-                      MODAL AÑOS
-               ================================ */
+                .then(data => {
+                    dataGlobal = data;
+                    YEAR_SELECTED = Object.keys(dataGlobal)[0];
+                    cargarModalAnios();
+                    cargarSemestresSidebar();
+                });
+
             function cargarModalAnios() {
                 const lista = document.getElementById("lista-anios");
                 lista.innerHTML = "";
-        
                 Object.keys(dataGlobal).forEach(anio => {
-                    lista.innerHTML += `<p><a onclick="cambiarAnio('${anio}')">${anio}</a></p>`;
+                    let a = document.createElement('a');
+                    a.className = "collection-item";
+                    a.innerText = anio;
+                    a.onclick = () => {
+                        YEAR_SELECTED = anio;
+                        cargarSemestresSidebar();
+                        M.Modal.getInstance(document.getElementById("modal-anios")).close();
+                    };
+                    lista.appendChild(a);
                 });
             }
-        
-            window.cambiarAnio = function(anio) {
-                YEAR_SELECTED = anio;
-                SEMESTRE_SELECTED = null;
-                cargarSemestresSidebar();
-                M.Modal.getInstance(document.getElementById("modal-anios")).close();
-            };
-        
-            /* ================================
-                SIDEBAR → SEMESTRES + SECRETARÍAS
-               ================================ */
+
             function cargarSemestresSidebar() {
-        
                 const coll = document.getElementById("semestres-collapsible");
                 coll.innerHTML = "";
-        
                 const semestres = Object.keys(dataGlobal[YEAR_SELECTED]);
-        
+
                 semestres.forEach(sem => {
-                    const nombreSem =
-                        sem === "primer_semestre" ? "Primer Semestre" :
-                        sem === "segundo_semestre" ? "Segundo Semestre" :
-                        sem;
-        
-                    /* Crear ítem del semestre */
                     const li = document.createElement("li");
-        
+                    const nombre = sem.replace("_", " ").toUpperCase();
                     li.innerHTML = `
-                        <div class="collapsible-header">${nombreSem}</div>
+                        <div class="collapsible-header"><i class="material-icons">keyboard_arrow_down</i>${nombre}</div>
                         <div class="collapsible-body" style="padding:0;">
-                            <ul class="collection" id="sec-${sem}" style="border:0; margin:0;"></ul>
+                            <div class="collection" id="sec-${sem}" style="border:0; margin:0;"></div>
                         </div>
                     `;
-        
                     coll.appendChild(li);
-        
-                    /* Cargar secretarías dentro del semestre */
+
                     const secList = li.querySelector(`#sec-${sem}`);
                     const semData = dataGlobal[YEAR_SELECTED][sem];
-        
-                    if (semData.secretarias) {
-                        Object.keys(semData.secretarias).forEach(cod => {
-                            const sec = semData.secretarias[cod];
-        
-                            const item = document.createElement("li");
-                            item.className = "collection-item";
-                            item.style.cssText = "background:#1b5e20; color:white; cursor:pointer;";
-        
-                            item.textContent = sec.nombre;
-        
-                            item.addEventListener("click", () => {
-                                document.querySelectorAll(".collection-item")
-                                    .forEach(x => x.style.background = "#1b5e20");
-                                item.style.background = "rgba(255,255,255,0.2)";
-                                SEMESTRE_SELECTED = sem;
-                                cargarDirecciones(sec);
-                            });
-        
-                            secList.appendChild(item);
-                        });
-                    }
+
+                    Object.keys(semData.secretarias).forEach(cod => {
+                        const sec = semData.secretarias[cod];
+                        const item = document.createElement("a");
+                        item.className = "collection-item";
+                        item.innerText = sec.nombre;
+                        item.onclick = (e) => {
+                            e.preventDefault();
+                            cargarDirecciones(sec);
+                            if(window.innerWidth <= 992) M.Sidenav.getInstance(document.getElementById('slide-out')).close();
+                        };
+                        secList.appendChild(item);
+                    });
                 });
-        
-                M.Collapsible.init(document.querySelectorAll('.collapsible'));
-        
-                /* Seleccionar por defecto el primer semestre */
-                SEMESTRE_SELECTED = semestres[0];
-        
-                /* Seleccionar automáticamente la primera secretaría */
-                const firstSecretaria =
-                    coll.querySelector("ul.collection .collection-item");
-        
-                if (firstSecretaria) firstSecretaria.click();
+                M.Collapsible.init(coll);
             }
-        
-            /* ================================
-                   DIRECCIONES → TABS
-               ================================ */
+
             function cargarDirecciones(sec) {
-        
                 const tabs = document.getElementById("direcciones-tabs");
+                const select = document.getElementById("direcciones-select");
                 tabs.innerHTML = "";
-        
-                if (!sec.direcciones || sec.direcciones.length === 0) {
-                    tabs.innerHTML = `<li class="tab"><a href="#!">Sin Direcciones</a></li>`;
-                    cargarDireccion({ nombre: sec.nombre, empleados: 0, funcionarios: {}, gastos: [] });
-                    return;
-                }
-        
+                select.innerHTML = "";
+
+                if (!sec.direcciones || sec.direcciones.length === 0) return;
+
                 sec.direcciones.forEach((dir, idx) => {
                     let li = document.createElement("li");
                     li.className = "tab";
-                    li.innerHTML = `<a data-i="${idx}">${dir.nombre}</a>`;
+                    li.innerHTML = `<a href="#dir${idx}">${dir.nombre}</a>`;
+                    li.onclick = () => cargarDireccion(dir);
                     tabs.appendChild(li);
-        
-                    li.querySelector("a").addEventListener("click", (e) => {
-                        document.querySelectorAll("#direcciones-tabs .tab a")
-                            .forEach(a => a.classList.remove("active"));
-                        e.target.classList.add('active');
-                        cargarDireccion(dir);
-                    });
+
+                    let opt = document.createElement("option");
+                    opt.value = idx;
+                    opt.innerText = dir.nombre;
+                    select.appendChild(opt);
                 });
-        
-                const firstTab = tabs.querySelector(".tab a");
-                if (firstTab) {
-                    firstTab.classList.add("active");
-                    cargarDireccion(sec.direcciones[0]);
-                }
+
+                select.onchange = (e) => cargarDireccion(sec.direcciones[e.target.value]);
+                M.Tabs.init(tabs);
+                cargarDireccion(sec.direcciones[0]);
             }
-        
-            /* ================================
-                CONTENIDO DE DIRECCIÓN
-               ================================ */
+
             function cargarDireccion(dir) {
                 const funcBox = document.getElementById("func-list");
-                funcBox.innerHTML = `<h6><b>${dir.nombre}</b></h6>`;
-                funcBox.innerHTML += `<p><b>Empleados:</b> ${dir.empleados}</p>`;
-        
+                funcBox.innerHTML = `<h6><b>${dir.nombre}</b></h6><p>Empleados: ${dir.empleados}</p>`;
                 if (dir.funcionarios) {
                     Object.entries(dir.funcionarios).forEach(([cargo, nombre]) => {
                         funcBox.innerHTML += `<p>${cargo}: <b>${nombre}</b></p>`;
                     });
                 }
-        
-                const ctx = document.getElementById("chart-actual").getContext("2d");
-        
+
                 const presup = (dir.gastos || []).reduce((a, g) => a + (g.presupuestado || 0) + (g.reestructura || 0), 0);
                 const comprom = (dir.gastos || []).reduce((a, g) => a + (g.comprometido || 0), 0);
-        
+
+                const ctx = document.getElementById("chart-actual").getContext("2d");
                 if (chartInstance) chartInstance.destroy();
                 chartInstance = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['Presupuesto', 'Ejecución Total'],
+                        labels: ['Presupuestado', 'Ejecutado'],
                         datasets: [{
-                            label: 'Montos',
+                            label: '$ ARS',
                             data: [presup, comprom],
                             backgroundColor: ['#64b5f6', '#4caf50']
                         }]
                     },
                     options: { responsive: true, maintainAspectRatio: false }
                 });
-        
-                const valores = new Array(7).fill(0);
+
                 const montos = new Array(7).fill(0);
-        
-                const totalEj = comprom;
-        
                 (dir.gastos || []).forEach(g => {
-                    const key = `Z=${g.codigoZ}`;
-                    const idx = Z_MAPPING[key];
-                    if (idx !== undefined) {
-                        montos[idx] += (g.comprometido || 0);
-                        valores[idx] = totalEj ? Math.round((g.comprometido / totalEj) * 100) : 0;
-                    }
+                    const idx = Z_MAPPING[`Z=${g.codigoZ}`];
+                    if (idx !== undefined) montos[idx] += (g.comprometido || 0);
                 });
-        
-                setProgress(valores, montos);
-            }
-        
-            /* ================================
-                      PROGRESS BARS
-               ================================ */
-            function setProgress(valores, montos) {
+
                 const bars = document.querySelectorAll('#progress-container .progress');
                 const titles = document.querySelectorAll('#progress-container .progress-title');
-        
                 bars.forEach((bar, i) => {
-                    const determinate = bar.querySelector(".determinate");
-        
-                    determinate.style.width = valores[i] + "%";
-        
-                    const montoFmt = montos[i].toLocaleString("es-AR", { minimumFractionDigits: 2 });
-                    titles[i].textContent = `${PROGRESS_TITLES[i]} — $ ${montoFmt}`;
+                    const pct = presup ? Math.round((montos[i] / presup) * 100) : 0;
+                    bar.querySelector(".determinate").style.width = Math.min(pct, 100) + "%";
+                    titles[i].innerText = `${PROGRESS_TITLES[i]} — $ ${montos[i].toLocaleString("es-AR")}`;
                 });
             }
-        
         });
-        </script>
+    </script>
+</body>
 </html>
