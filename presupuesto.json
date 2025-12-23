@@ -8,7 +8,7 @@
           {
             "codigo": "10",
             "nombre": "CONCEJO DELIBERANTE",
-            "empleados": 0,
+            "empleados": 35,
             "funcionarios": {"PRESIDENTE":"Campo Alberto Ramon","VICEPRESIDENTE PRIMERO":"Gomez Roberto Anibal","VICEPRESIDENTA SEGUNDA":"Cintia Belen Gette","SECRETARIA":"Cabrino Maria Daniela","SECRETARIO ADMINISTRATIVO":"Gomez Huinchinao Juan Jose Antonio"},
             "descripcion": "",
             "gastos": [
@@ -58,7 +58,7 @@
           {
             "codigo": "20",
             "nombre": "INTENDENCIA",
-            "empleados": 0,
+            "empleados": 3,
             "funcionarios": {"INTENDENTA MUNICIPAL": "Alonso Fernanda Estefania","SECRETARIO COORDINADOR":"Privitera Edgardo Roberto"},
             "descripcion": "Establecer las políticas generales de la gestión municipal",
             "gastos": [
@@ -95,7 +95,7 @@
           {
             "codigo": "21",
             "nombre": "JUZGADO DE FALTAS",
-            "empleados": 0,
+            "empleados": 10,
             "funcionarios": {"JUZGADO DE FALTAS": "Lettieri Eduardo Nicolas","SECRETARIA DE TRÁNSITO DEL TRIBUNAL DE FALTAS":"Bertone Fabiana Beatriz","SECRETARIA DE COMERCIO DEL TRIBUNAL DE FALTAS":"Morales Laura Soledad"},
             "descripcion": "Dictar sentencias por las infracciones  a las ordenanzas municipales vigentes.",
             "gastos": [
@@ -132,7 +132,7 @@
           {
             "codigo": "22",
             "nombre": "ASUNTOS LEGALES",
-            "empleados": 0,
+            "empleados": 8,
             "funcionarios": {"DIRECCIÓN DE ASUNTOS LEGALES":"Baffini Fabricio Fabio"},
             "descripcion": "Aesoraramiento jurídico al Dpto. Ejecutivo",
             "gastos": [
@@ -169,7 +169,7 @@
           {
             "codigo": "23",
             "nombre": "COMUNICACIONES",
-            "empleados": 0,
+            "empleados": 2,
             "funcionarios": {"DIRECCIÓN DE COMUNICACIONES": "González Rocio Belén","COORDINACIÓN DE DISEÑO COMUNICACIONAL":"Bonessi Guillermo Luis"},
             "descripcion": "Consolidar la comunicación interna y externa de la Municipalidad de General Pico, con la correspondiente difusión de acciones y actos de gobierno de todas las áreas de dicha institución.",
             "gastos": [
@@ -206,7 +206,7 @@
           {
             "codigo": "24",
             "nombre": "MODERNIZ.E INNOV.TECNOLOGICA",
-            "empleados": 0,
+            "empleados": 11,
             "funcionarios": {"DIRECCIÓN DE MODERNIZACIÓN E INNOVACIÓN TECNOLÓGICA":"Bértola Macarena"},
             "descripcion": "Analizar, diseñar e implementar los sistemas computarizados de información de la gestión municipal",
             "gastos": [
@@ -243,7 +243,7 @@
           {
             "codigo": "25",
             "nombre": "PROTOCOLO Y CEREMONIAL",
-            "empleados": 0,
+            "empleados": 3,
             "funcionarios": {},
             "descripcion": "Organización y Getión del protocolo en actos y eventos en el ámbito Municipal.",
             "gastos": [
@@ -323,7 +323,7 @@
           {
             "codigo": "30",
             "nombre": "GOBIERNO SEG.EDUC.Y CULTURA",
-            "empleados": 0,
+            "empleados": 5,
             "funcionarios": {"SECRETARÍA DE GOBIERNO":"Mendoza Nicolas"},
             "descripcion": "Lograr el funcionamiento, administración y ejecución de las actividades previstas por la Secretaría de Gobierno.",
             "gastos": [
@@ -367,7 +367,7 @@
           {
             "codigo": "31",
             "nombre": "RECURSOS HUMANOS",
-            "empleados": 0,
+            "empleados": 23,
             "funcionarios": {"DIRECCIÓN DE RECURSOS HUMANOS": "Bustos Andrea Fabiana"},
             "descripcion": "Administración y contralor de los recursos humanos y patrimoniales de la Comuna",
             "gastos": [
@@ -404,7 +404,7 @@
           {
             "codigo": "32",
             "nombre": "PREVENC.Y SEGURIDAD CIUDADANA",
-            "empleados": 0,
+            "empleados": 75,
             "funcionarios": {"DIRECCIÓN DE PREVENCIÓN Y SEGURIDAD CIUDADANA": "Viola Cristián Exequiel"},
             "descripcion": "Tomar medidas en forma conjunta con los departamentos e interrelacionar las actividades que éstos desarrollan,con vistas a mejorar la calidad de vida de la población",
             "gastos": [
@@ -448,7 +448,7 @@
           {
             "codigo": "33",
             "nombre": "GESTION CULTURAL",
-            "empleados": 0,
+            "empleados": 34,
             "funcionarios": {"DIRECCIÓN DE GESTIÓN CULTURAL":"Rach Matias Maximiliano"},
             "descripcion": "Administración y contralor de todas las actividades que se desarrollan en la órbita de la Dirección de Cultura y que persiguen como finalidad el desarrollo cultural de la ciudad y de sus habitantes.",
             "gastos": [
@@ -492,7 +492,7 @@
           {
             "codigo": "34",
             "nombre": "PARTICIP.CIUD.Y REL. INSTIT.",
-            "empleados": 0,
+            "empleados": 2,
             "funcionarios": {"DIRECCIÓN DE PARTICIPACIÓN CIUDADANA Y RELACIONES INSTITUCIONALES":"Gomez Somoza Alejandro Ezequiel"},
             "descripcion": "Administración y contralor de las áreas municipales correspondientes y de las Insituciones Intermedias",
             "gastos": [
@@ -543,7 +543,7 @@
           {
             "codigo": "35",
             "nombre": "DIR. DE JUVENTUD",
-            "empleados": 0,
+            "empleados": 4,
             "funcionarios": {"DIRECCIÓN DE JUVENTUD":"Alanis Matias Josue"},
             "descripcion": "Proporcionar un espacio de encuentro, participación y esparcimiento, con pleno protagonismo de sus participantes",
             "gastos": [
@@ -587,7 +587,7 @@
           {
             "codigo": "36",
             "nombre": "GERENCIA DE CHOFERES",
-            "empleados": 0,
+            "empleados": 15,
             "funcionarios": {},
             "descripcion": "Administración y Gestión de los automotores destinados a la prestación de servicios al Dpto. Ejecutivo",
             "gastos": [
@@ -624,7 +624,7 @@
           {
             "codigo": "37",
             "nombre": "DIR. DE EDUCACION",
-            "empleados": 0,
+            "empleados": 7,
             "funcionarios": {"DIRECCIÓN DE EDUCACIÒN": "Ramirez Gabriela Alejandra"},
             "descripcion": "Desarrollar, Incentivar y afianzar la participación de niños,niñas, adolescentes y adultos en prácticas activas comunitarias.",
             "gastos": [
@@ -661,7 +661,7 @@
           {
             "codigo": "38",
             "nombre": "DIR. DE DEPORTES",
-            "empleados": 0,
+            "empleados": 16,
             "funcionarios": {"DIRECCIÓN DE DEPORTE": "Lera Mariela Elizabeth"},
             "descripcion": "Fomentar la actividad física, recreativa y deportiva, Buscando la integración a través del juego y el deporte.",
             "gastos": [
@@ -762,7 +762,7 @@
           {
             "codigo": "41",
             "nombre": "ENTE REGULADOR DE SERV.CONS.",
-            "empleados": 0,
+            "empleados": 11,
             "funcionarios": {"ENTE REGULADOR DE SERVICIOS CONCESIONADOS":"Viola Horacio Alberto"},
             "descripcion": "Controlar las prestaciones sobre concesiones de servicios públicos ejecutados por terceros",
             "gastos": [
@@ -799,7 +799,7 @@
           {
             "codigo": "42",
             "nombre": "INFRAEST.Y OBRAS MUNICIPALES",
-            "empleados": 0,
+            "empleados": 15,
             "funcionarios": {"DIRECCIÓN DE INFRAESTRUCTURA Y OBRAS MUNICIPALES":"Vitali Agustin"},
             "descripcion": "Proyección, dirección y ejecución de las obras municipales,como también mejorar la señalización y semaforización para el ordenamiento del tránsito.",
             "gastos": [
@@ -843,7 +843,7 @@
           {
             "codigo": "43",
             "nombre": "OBRAS PARTICULARES",
-            "empleados": 0,
+            "empleados": 13,
             "funcionarios": {"DIRECCIÓN DE OBRAS PARTICULARES":"Reinhard Ariel Francisco"},
             "descripcion": "Llevar a cabo tareas inherentes a las documentaciones catastrales y de obras de todas las construcciones del ejido urbano.",
             "gastos": [
@@ -880,7 +880,7 @@
           {
             "codigo": "44",
             "nombre": "PLANEAM.Y CATASTRO",
-            "empleados": 0,
+            "empleados": 1,
             "funcionarios": {"PLANEAMIENTO Y CATASRO":"Sanchez Micaela Fabiana"},
             "descripcion": "Llevar a cabo las actvidades necesarias con el fin de definir el planeamiento estratégico urbano de la ciudad",
             "gastos": [
@@ -917,7 +917,7 @@
           {
             "codigo": "45",
             "nombre": "DISEÑO Y PLANIFIC.",
-            "empleados": 0,
+            "empleados": 2,
             "funcionarios": {"DIRECCION DISEÑO Y PLANIFICACIÓN TERRITORIAL":"Villa Marcos Federico"},
             "descripcion": "Diseño y rediseño de las plantas edilicias actuales y futuras obras que se hagan en el Municipio. Planificación territorial de la ciudad.",
             "gastos": [
@@ -960,7 +960,7 @@
           {
             "codigo": "50",
             "nombre": "SEC.DE AMB. Y SERV.PUB.",
-            "empleados": 0,
+            "empleados": 17,
             "funcionarios": {"SECRETARÍA DE AMBIENTE Y SERVICIOS PÚBLICOS":"Adamo Sebastián Victor Guillermo"},
             "descripcion": "Lograr mayores y mejores niveles de calidad en la gestión de trámites relacionados con los servicios públicos brindados al vecino, en pos de la preservación de la higiene y salubridad medio-ambiente",
             "gastos": [
@@ -997,7 +997,7 @@
           {
             "codigo": "51",
             "nombre": "AMBIENTE Y DESAR.SUSTENTABLE",
-            "empleados": 0,
+            "empleados": 9,
             "funcionarios": {"DIRECCIÓN GENERAL DE AMBIENTE Y DESARROLLO SUSTENTABLE":"Medus Melina"},
             "descripcion": "Mejorar la calidad de vida de la población actuando sobre nuestro medio ambiente.",
             "gastos": [
@@ -1034,7 +1034,7 @@
           {
             "codigo": "52",
             "nombre": "SERVICIOS PUBLICOS",
-            "empleados": 0,
+            "empleados": 80,
             "funcionarios": {"DIRECCIÓN DE SERVICIOS PÚBLICOS": "Quintin Walter Dario"},
             "descripcion": "Realizar las tareas necesarias a fin de mantener y conservar las calles de la ciudad. Recolección residuos especial y domiciliaria y limpieza de canales pluviales",
             "gastos": [
@@ -1071,7 +1071,7 @@
           {
             "codigo": "53",
             "nombre": "DIR.ARBOLADO Y PARQUES URBANOS",
-            "empleados": 0,
+            "empleados": 23,
             "funcionarios": {"DIRECCIÓN DE ARBOLADO Y PARQUES URBANOS":"Belliardo Lucas Adrian"},
             "descripcion": "Implementar los proyectos en espacios verdes destinados a la receación pasiva, complementando una línea de acción destinada a dotar de insfraestructura necesaria para tal fin.",
             "gastos": [
@@ -1108,7 +1108,7 @@
           {
             "codigo": "54",
             "nombre": "DIR.ZOONOSIS Y VECTORES",
-            "empleados": 0,
+            "empleados": 8,
             "funcionarios": {"DIRECCIÓN DE ZOONOSIS Y VECTORES":"Calmels Matias Alejandro"},
             "descripcion": "Mejorar la calidad de vida de la población actuando sobre las enfermedades que puedan transmitir los animales",
             "gastos": [
@@ -1161,7 +1161,7 @@
           {
             "codigo": "56",
             "nombre": "DIR.GIRSU",
-            "empleados": 0,
+            "empleados": 105,
             "funcionarios": {"RRU & GIRSU": "Acosta Adrian Matias"},
             "descripcion": "Lograr mayores y mejores niveles de calidad en la gestión de trámites relacionados con los servicios públicos brindados al vecino, en pos de la preservación  de la higiene y salubridad medio-ambiente",
             "gastos": [
@@ -1204,7 +1204,7 @@
           {
             "codigo": "60",
             "nombre": "SEC.DE DESAROLLO SOCIAL",
-            "empleados": 0,
+            "empleados": 9,
             "funcionarios": {"SECRETARÍA DE DESARROLLO SOCIAL":"Luna Echegaray Gabriela Anahi"},
             "descripcion": "Realizar la gestión estratégica de la Secretaría estableciendo objetivos y prioridades",
             "gastos": [
@@ -1248,7 +1248,7 @@
           {
             "codigo": "61",
             "nombre": "DIR.DE FAMILIA",
-            "empleados": 0,
+            "empleados": 47,
             "funcionarios": {"DIRECCIÓN DE FAMILIA":"Perez Santillan Ivana Jesica"},
             "descripcion": "Desarrollar programas de prevención y promoción social,destinados a toda la población, minimizando los factores de riesgo a que están expuestos los sectores más vulnerables de la sociedad",
             "gastos": [
@@ -1292,7 +1292,7 @@
           {
             "codigo": "62",
             "nombre": "CETROS.DE DESARROLLO INFANTIL",
-            "empleados": 0,
+            "empleados": 33,
             "funcionarios": {"DIRECCIÓN DE FAMILIA":"Perez Santillan Ivana Jesica"},
             "descripcion": "Atender las necesidades nutricionales de niños y ofrecer un servicio educativo-social que ",
             "gastos": [
@@ -1329,7 +1329,7 @@
           {
             "codigo": "63",
             "nombre": "DIR. DESARROLLO COMUNITARIO",
-            "empleados": 0,
+            "empleados": 59,
             "funcionarios": {"COORDINACIÓN DE CENTROS DE DESARROLLO TERRITORIAL":"Romero Maria Silvina"},
            
             "descripcion": "",
@@ -1367,7 +1367,7 @@
           {
             "codigo": "64",
             "nombre": "UNIDAD LOCAL DE NIÑEZ",
-            "empleados": 0,
+            "empleados": 21,
             "funcionarios": {"DIRECCIÓN UNIDAD LOCAL DE NIÑEZ":"Hubert Gabriela Ines","":"Vargas Patricia Belen"},
             "descripcion": "",
             "gastos": [
@@ -1411,7 +1411,7 @@
           {
             "codigo": "65",
             "nombre": "POLITICAS DE GENERO",
-            "empleados": 0,
+            "empleados": 8,
             "funcionarios": {"DIRECCIÓN DE POLÍTICAS DE GÉNERO":"Garrido Carina Alejandra"},
             "descripcion": "",
             "gastos": [
@@ -1455,7 +1455,7 @@
           {
             "codigo": "66",
             "nombre": "DIR. DE ARTICULAC. TERRITORIAL",
-            "empleados": 0,
+            "empleados": 4,
             "funcionarios": {"DIRECCIÓN DE ARTICULACIÓN TERRITORIAL":"Sanchez Graciela Adriana"},
             "descripcion": "",
             "gastos": [
@@ -1498,7 +1498,7 @@
           {
             "codigo": "70",
             "nombre": "SEC.DE ECONOMIA",
-            "empleados": 0,
+            "empleados": 3,
             "funcionarios": {"SECRETARÍA DE ECONOMÍA":"Anconetani Luis Alberto"},
             "descripcion": "",
             "gastos": [
@@ -1535,7 +1535,7 @@
           {
             "codigo": "71",
             "nombre": "CONTADURIA GENERAL",
-            "empleados": 0,
+            "empleados": 17,
             "funcionarios": {"CONTADURÍA GENERAL":"Medina Martin Alfredo","DIRECCIÓN DE CONTROL INTERNO Y AUDITORÍA":"Ferraro Luis Eduardo"},
             "descripcion": "",
             "gastos": [
@@ -1572,7 +1572,7 @@
           {
             "codigo": "72",
             "nombre": "RENTAS",
-            "empleados": 0,
+            "empleados": 22,
             "funcionarios": {"DIRECCIÓN DE RENTAS":"Irrazabal Juan Cruz"},
             "descripcion": "",
             "gastos": [
@@ -1609,7 +1609,7 @@
           {
             "codigo": "73",
             "nombre": "DIR. COMERCIO",
-            "empleados": 0,
+            "empleados": 28,
             "funcionarios": {"DIRECCIÓN DE COMERCIO":"Maidana Andres Esteban"},
             "descripcion": "",
             "gastos": [
@@ -1646,7 +1646,7 @@
           {
             "codigo": "74",
             "nombre": "DES.ECONOM.Y PRODUCT.",
-            "empleados": 0,
+            "empleados": 31,
             "funcionarios": {"DIRECCIÓN DE DESARROLLO ECONÓMICO Y PRODUCTIVO":"Carrizo Yolanda Miriam","COORDINACIÓN DE NUEVAS ECONOMÍAS Y EMPRENDEDURISMO":"Muñoz Melina","COORDINACIÓN DE DESARROLLO LOCAL Y TURISMO":"Robledo Maximiliano"},
             "descripcion": "",
             "gastos": [
@@ -1697,7 +1697,7 @@
           {
             "codigo": "75",
             "nombre": "TESORERIA",
-            "empleados": 0,
+            "empleados": 10,
             "funcionarios": {"TESORERÍA":"Aragona Hernan Gustavo"},
             "descripcion": "",
             "gastos": [
@@ -1740,7 +1740,7 @@
           {
             "codigo": "80",
             "nombre": "PLANTA DE ASFALTO",
-            "empleados": 0,
+            "empleados": 19,
             "funcionarios": {"ORGANISMO DESCENTRALIZADO DE PLANTA DE ASFALTO":"Garro Diego Nicolas"},
             "descripcion": "",
             "gastos": [
@@ -1777,7 +1777,7 @@
           {
             "codigo": "81",
             "nombre": "CAMINOS VECINALES",
-            "empleados": 0,
+            "empleados": 1,
             "funcionarios": {"ORGANISMO DESCENTRALIZADO CAMINOS VECINALES":"Balbidare Dario German"},
             "descripcion": "",
             "gastos": [
