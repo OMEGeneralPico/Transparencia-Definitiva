@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Transparencia Municipal</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+html,body{
+margin:0;
+padding:0;
+height:100vh;
+background:#f5f5f5;
+font-family:"Roboto",sans-serif;
+overflow-x:hidden;
+}
+
+#top-navbar{
+background:#1b5e20;
+height:64px;
+display:flex;
+align-items:center;
+position:fixed;
+top:0;
+width:100%;
+z-index:1000;
+padding:0 15px;
+}
+
+#top-navbar img{
+height:45px;
+margin-left:10px;
+}
+
+.sidenav-trigger{
+color:white!important;
+display:block;
+}
+
+#layout{
+padding-top:64px;
+display:flex;
+}
+
+.sidenav{
+background:#1b5e20;
+color:white;
+padding-top:20px;
+width:280px;
+}
+
+.sidebar-title{
+padding:14px 20px;
+font-size:15px;
+font-weight:bold;
+color:rgba(255,255,255,0.8);
+text-transform:uppercase;
+}
+
+.collection-item{
+background:#1b5e20!important;
+color:white!important;
+border:0!important;
+cursor:pointer;
+padding-left:50px!important;
+}
+
+.collection-item:hover{
+background:rgba(255,255,255,0.1)!important;
+}
+
+#main{
+flex-grow:1;
+padding-left:280px;
+width:100%;
+}
+
+@media(max-width:992px){
+#main{padding-left:0;}
+}
+
+.tabs{
+background:#4a148c!important;
+margin:0!important;
+width:100%!important;
+height:48px!important;
+}
+
+.tabs .tab a{
+color:rgba(255,255,255,0.7)!important;
+}
+
+.tabs .tab a.active{
+background:rgba(255,255,255,0.2)!important;
+color:white!important;
+}
+
+.tabs .indicator{
+background:white!important;
+}
+
+#direccion-content{
+padding:15px;
+}
+
+.bento-grid{
+display:grid;
+grid-template-columns:1fr;
+gap:15px;
+}
+
+@media(min-width:601px){
+.bento-grid{
+grid-template-columns:1fr 1fr;
+}
+}
+
+.bento-item{
+background:white;
+border-radius:12px;
+padding:20px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+#logo-final{
+text-align:center;
+padding:20px;
+margin-top:30px;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav id="top-navbar">
+<a href="#" data-target="slide-out" class="sidenav-trigger">
+<i class="material-icons">menu</i>
+</a>
+<img src="imagenes/pico.png">
+</nav>
+
+<div id="layout">
+
+<ul id="slide-out" class="sidenav sidenav-fixed">
+
+<div class="sidebar-title">Semestres</div>
+<ul id="semestres-collapsible"></ul>
+
+<div class="divider" style="background:rgba(255,255,255,0.1)"></div>
+
+<div class="sidebar-title">Ingresos</div>
+<li>
+<a class="white-text" id="btn-ingresos">
+<i class="material-icons left white-text">trending_up</i>
+Ingresos
+</a>
+</li>
+
+<div class="divider" style="background:rgba(255,255,255,0.1)"></div>
+
+<div class="sidebar-title">Opciones</div>
+<li>
+<a class="modal-trigger white-text" href="#modal-anios">
+<i class="material-icons left white-text">calendar_today</i>
+Años anteriores
+</a>
+</li>
+
+<div id="logo-final">
+<img src="imagenes/ome.png" style="width:50%;opacity:0.8;">
+</div>
+
+</ul>
+
+<main id="main">
+
+<div id="direccion-content">
+
+<div id="mensaje-inicial" class="bento-item" style="text-align:center;padding:40px;color:#666;">
+<i class="material-icons" style="font-size:48px;margin-bottom:15px;color:#4a148c;">info</i>
+<h5 style="margin:0;color:#4a148c;">Seleccione una opción</h5>
+<p>Elija una secretaría o Ingresos</p>
+</div>
+
+<div class="bento-grid" id="contenido-graficos" style="display:none;"></div>
+
+<div class="bento-grid" id="ingresos-grid" style="display:none;"></div>
+
+</div>
+
+</main>
+
+</div>
+
+<div id="modal-anios" class="modal">
+<div class="modal-content">
+<h4>Seleccionar Año</h4>
+<div id="lista-anios" class="collection"></div>
+</div>
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded",function(){
+
+M.Sidenav.init(document.querySelectorAll('.sidenav'))
+M.Modal.init(document.querySelectorAll('.modal'))
+
+let ingresosData=null
+
+fetch("ingresos.json")
+.then(r=>r.json())
+.then(data=>{
+ingresosData=data
+})
+
+document.getElementById("btn-ingresos").onclick=()=>{
+
+document.getElementById("mensaje-inicial").style.display="none"
+document.getElementById("contenido-graficos").style.display="none"
+
+mostrarIngresos()
+
+}
+
+function mostrarIngresos(){
+
+const grid=document.getElementById("ingresos-grid")
+
+grid.style.display="grid"
+grid.innerHTML=""
+
+const year=Object.keys(ingresosData)[0]
+
+const codigos=ingresosData[year]
+
+Object.keys(codigos).forEach(codigo=>{
+
+const item=codigos[codigo]
+
+const total=Object.values(item.ingresado)
+.reduce((a,b)=>a+b,0)
+
+const card=document.createElement("div")
+card.className="bento-item"
+
+const canvasId="chart_ing_"+codigo
+
+card.innerHTML=`
+<h6><b>${codigo}</b> - ${item.descripcion}</h6>
+<canvas id="${canvasId}" height="120"></canvas>
+<div style="margin-top:10px;font-weight:500;color:#4a148c">
+Recaudación total $${total.toLocaleString("es-AR")}
+</div>
+`
+
+grid.appendChild(card)
+
+crearGraficoIngresos(canvasId,item)
+
+})
+
+}
+
+function crearGraficoIngresos(canvasId,item){
+
+const ctx=document.getElementById(canvasId)
+
+const meses=[
+"Ene","Feb","Mar","Abr","May","Jun",
+"Jul","Ago","Sep","Oct","Nov","Dic"
+]
+
+const valores=Object.values(item.ingresado)
+
+new Chart(ctx,{
+type:"bar",
+data:{
+labels:meses,
+datasets:[{
+data:valores,
+backgroundColor:"#8C4E80"
+}]
+},
+options:{
+responsive:true,
+plugins:{
+legend:{display:false}
+},
+scales:{
+y:{
+ticks:{
+callback:v=>"$"+v.toLocaleString("es-AR")
+}
+}
+}
+}
+})
+
+}
+
+})
+
+</script>
+
+</body>
+</html>

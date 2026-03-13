@@ -71,7 +71,7 @@
             background: rgba(255, 255, 255, 0.15); /* Fondo blanco translúcido visible */
         }
         .tabs::-webkit-scrollbar-thumb { 
-            background: red; /* Barra blanca sólida */
+            background: #3A84B0; /* Barra blanca sólida */
             border-radius: 10px;
         }
 
@@ -109,8 +109,17 @@
     <div id="layout">
         <ul id="slide-out" class="sidenav sidenav-fixed">
             <div class="sidebar-title">Semestres</div>
+                        <div class="sidebar-title">Ejecucion Presupuestaria</div>
             <ul class="collapsible collapsible-accordion" id="semestres-collapsible">
                 </ul>
+            <div class="divider" style="background:rgba(255,255,255,0.1)"></div>
+            <div class="sidebar-title">Ingresos</div>
+            <li>
+                <a class="white-text" id="btn-ingresos">
+                    <i class="material-icons left white-text">trending_up</i>
+                    Ingresos
+                </a>
+            </li>
             <div class="divider" style="background:rgba(255,255,255,0.1)"></div>
             <div class="sidebar-title">Opciones</div>
             <li><a class="modal-trigger white-text" href="#modal-anios"><i class="material-icons left white-text">calendar_today</i>Años anteriores</a></li>
@@ -152,6 +161,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="bento-grid" id="ingresos-grid" style="display: none;"></div>
             </div>
         </main>
     </div>
@@ -165,20 +175,21 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-        
+            // Inicialización de componentes base de Materialize
             M.Sidenav.init(document.querySelectorAll('.sidenav'));
             M.Modal.init(document.querySelectorAll('.modal'));
-        
+    
             let dataGlobal = null;
             let YEAR_SELECTED = null;
             let chartInstance = null;
-        
-            const Z_MAPPING = { "Z=1":0,"Z=2":1,"Z=3":2,"Z=4":3,"Z=5":4,"Z=6":5,"Z=7":6 };
-        
-            const PROGRESS_TITLES =
-                Array.from(document.querySelectorAll('#progress-container .progress-title'))
+            let ingresosData = null;
+    
+            const Z_MAPPING = { "Z=1": 0, "Z=2": 1, "Z=3": 2, "Z=4": 3, "Z=5": 4, "Z=6": 5, "Z=7": 6 };
+    
+            const PROGRESS_TITLES = Array.from(document.querySelectorAll('#progress-container .progress-title'))
                 .map(t => t.innerText.split('—')[0].trim());
-        
+    
+            // Carga de datos
             fetch("presupuesto.json")
                 .then(r => r.json())
                 .then(data => {
@@ -187,314 +198,307 @@
                     cargarModalAnios();
                     cargarSemestresSidebar();
                 });
-        
+    
+            fetch("ingresos.json")
+                .then(r => r.json())
+                .then(data => {
+                    ingresosData = data;
+                });
+    
+            // Evento del botón de ingresos
+            document.getElementById("btn-ingresos").onclick = () => {
+                document.getElementById("mensaje-inicial").style.display = "none";
+                document.getElementById("contenido-graficos").style.display = "none";
+                document.getElementById("ingresos-grid").style.display = "grid";
+                
+                const tabsEl = document.getElementById("direcciones-tabs");
+                const tabsInstance = M.Tabs.getInstance(tabsEl);
+                if (tabsInstance) {
+                    tabsInstance.destroy();
+                }
+                tabsEl.innerHTML = "";
+                document.getElementById("direcciones-select").innerHTML = "";
+                
+                mostrarIngresos();
+            };
+    
             function cargarModalAnios() {
-        
                 const lista = document.getElementById("lista-anios");
+                if (!lista) return;
                 lista.innerHTML = "";
-        
                 Object.keys(dataGlobal).forEach(anio => {
-        
                     let a = document.createElement('a');
                     a.className = "collection-item";
                     a.innerText = anio;
-        
                     a.onclick = () => {
-        
                         YEAR_SELECTED = anio;
                         cargarSemestresSidebar();
-        
-                        M.Modal
-                        .getInstance(document.getElementById("modal-anios"))
-                        .close();
+                        M.Modal.getInstance(document.getElementById("modal-anios")).close();
                     };
-        
                     lista.appendChild(a);
                 });
             }
-        
+    
             function cargarSemestresSidebar() {
+    const coll = document.getElementById("semestres-collapsible");
+    if (!coll) return;
+    coll.innerHTML = "";
+
+    const secretariasUnificadas = {};
+    const semestres = Object.keys(dataGlobal[YEAR_SELECTED]);
+
+    semestres.forEach(sem => {
+        const semData = dataGlobal[YEAR_SELECTED][sem];
         
-                const coll = document.getElementById("semestres-collapsible");
-                coll.innerHTML = "";
-        
-                const secretariasUnificadas = {};
-                const semestres = Object.keys(dataGlobal[YEAR_SELECTED]);
-        
-                semestres.forEach(sem => {
-        
-                    const semData = dataGlobal[YEAR_SELECTED][sem];
-        
-                    Object.keys(semData.secretarias).forEach(cod => {
-        
-                        if (!secretariasUnificadas[cod]) {
-        
-                            secretariasUnificadas[cod] = {
-                                nombre: semData.secretarias[cod].nombre,
-                                datosSemestres: {}
-                            };
-                        }
-        
-                        secretariasUnificadas[cod]
-                        .datosSemestres[sem] = semData.secretarias[cod];
-                    });
-                });
-        
-                const listContainer = document.createElement('div');
-                listContainer.className = 'collection';
-                listContainer.style.cssText = 'border:0;margin:0;';
-        
-                Object.keys(secretariasUnificadas).forEach(cod => {
-        
-                    const sec = secretariasUnificadas[cod];
-        
-                    const item = document.createElement("a");
-                    item.className = "collection-item";
-                    item.innerText = sec.nombre;
-        
-                    item.onclick = (e) => {
-        
-                        e.preventDefault();
-                        cargarDireccionesUnificadas(sec);
-        
-                        if(window.innerWidth <= 992)
-                            M.Sidenav.getInstance(
-                                document.getElementById('slide-out')
-                            ).close();
+        // FILTRO 1: Asegurar que el objeto tiene la propiedad 'secretarias'
+        if (semData && semData.secretarias) {
+            Object.keys(semData.secretarias).forEach(cod => {
+                const secOriginal = semData.secretarias[cod];
+                
+                // FILTRO 2: No procesar si el código es vacío o no tiene nombre
+                if (!cod || !secOriginal.nombre) return;
+
+                if (!secretariasUnificadas[cod]) {
+                    secretariasUnificadas[cod] = {
+                        nombre: secOriginal.nombre,
+                        datosSemestres: {}
                     };
+                }
+                secretariasUnificadas[cod].datosSemestres[sem] = secOriginal;
+            });
+        }
+    });
+
+    const listContainer = document.createElement('div');
+    listContainer.className = 'collection';
+    listContainer.style.cssText = 'border:0;margin:0;';
+
+    Object.keys(secretariasUnificadas).forEach(cod => {
+        const sec = secretariasUnificadas[cod];
         
-                    listContainer.appendChild(item);
-                });
-        
-                coll.appendChild(listContainer);
+        // FILTRO 3: Seguridad final antes de crear el elemento en el DOM
+        if (!sec.nombre || sec.nombre.trim() === "") return;
+
+        const item = document.createElement("a");
+        item.className = "collection-item";
+        item.innerText = sec.nombre;
+        item.style.cursor = "pointer";
+        item.onclick = (e) => {
+            e.preventDefault();
+            cargarDireccionesUnificadas(sec);
+            if (window.innerWidth <= 992) {
+                const side = M.Sidenav.getInstance(document.getElementById('slide-out'));
+                if (side) side.close();
             }
-        
-            function cargarDireccionesUnificadas(secUnificada) {
-        
-                const tabs = document.getElementById("direcciones-tabs");
-const select = document.getElementById("direcciones-select");
-
-/* destruir tabs anteriores si existen */
-const tabsInstance = M.Tabs.getInstance(tabs);
-if (tabsInstance) {
-    tabsInstance.destroy();
+        };
+        listContainer.appendChild(item);
+    });
+    
+    // Si después de filtrar no hay secretarías, podrías mostrar un mensaje o no añadir nada
+    if (listContainer.children.length > 0) {
+        coll.appendChild(listContainer);
+    }
 }
-
-tabs.innerHTML = "";
-select.innerHTML = "";
-        
+            function cargarDireccionesUnificadas(secUnificada) {
+                const tabs = document.getElementById("direcciones-tabs");
+                const select = document.getElementById("direcciones-select");
+                if (!tabs || !select) return;
+    
+                const tabsInstance = M.Tabs.getInstance(tabs);
+                if (tabsInstance) {
+                    tabsInstance.destroy();
+                }
+    
+                tabs.innerHTML = "";
+                select.innerHTML = "";
+    
                 const direccionesUnificadas = {};
-        
                 Object.keys(secUnificada.datosSemestres).forEach(sem => {
-        
                     const secData = secUnificada.datosSemestres[sem];
-        
                     if (secData.direcciones) {
-        
                         secData.direcciones.forEach(dir => {
-        
                             if (!direccionesUnificadas[dir.codigo]) {
-        
                                 direccionesUnificadas[dir.codigo] = {
                                     nombre: dir.nombre,
                                     empleados: dir.empleados || 0,
                                     funcionarios: dir.funcionarios || {},
-                                    descripcion: dir.descripcion || "",
                                     datosSemestres: {}
                                 };
                             }
-        
-                            direccionesUnificadas[dir.codigo]
-                            .datosSemestres[sem] = dir;
+                            direccionesUnificadas[dir.codigo].datosSemestres[sem] = dir;
                         });
                     }
                 });
-        
-                if (Object.keys(direccionesUnificadas).length === 0) return;
-        
+    
                 const direcciones = Object.values(direccionesUnificadas);
-        
+                if (direcciones.length === 0) return;
+    
                 direcciones.forEach((dir, idx) => {
-        
                     let li = document.createElement("li");
                     li.className = "tab";
                     li.innerHTML = `<a href="#dir${idx}">${dir.nombre}</a>`;
                     li.onclick = () => cargarDireccionUnificada(dir);
-        
                     tabs.appendChild(li);
-        
+    
                     let opt = document.createElement("option");
                     opt.value = idx;
                     opt.innerText = dir.nombre;
-        
                     select.appendChild(opt);
                 });
-        
+    
                 select.onchange = (e) => {
                     cargarDireccionUnificada(direcciones[e.target.value]);
                 };
-        
+    
                 M.Tabs.init(tabs);
-        
-                /* 🔹 CARGA AUTOMÁTICA DE LA PRIMER DIRECCIÓN (FIX) */
-        
-                if (direcciones.length > 0) {
-        
-                    cargarDireccionUnificada(direcciones[0]);
-        
-                    const firstTab = tabs.querySelector('li a');
-        
-                    if (firstTab) {
-        
-                        const tabsInstance = M.Tabs.getInstance(tabs);
-        
-                        tabsInstance.select(
-                            firstTab.getAttribute('href').substring(1)
-                        );
-                    }
-                }
+                cargarDireccionUnificada(direcciones[0]);
             }
-        
+    
             function cargarDireccionUnificada(dir) {
-                const MOSTRAR_EMPLEADOS = false;
                 document.getElementById("mensaje-inicial").style.display = "none";
+                document.getElementById("ingresos-grid").style.display = "none";
                 document.getElementById("contenido-graficos").style.display = "grid";
-        
+    
                 const funcBox = document.getElementById("func-list");
-                funcBox.innerHTML =
-`<h6><b>${dir.nombre}</b></h6>`;
-
-if (MOSTRAR_EMPLEADOS) {
-    funcBox.innerHTML += `<p>Empleados: ${dir.empleados}</p>`;
-}
-                Object.entries(dir.funcionarios || {}).forEach(([cargo,nombre])=>{
+                funcBox.innerHTML = `<h6><b>${dir.nombre}</b></h6>`;
+                Object.entries(dir.funcionarios || {}).forEach(([cargo, nombre]) => {
                     funcBox.innerHTML += `<p>${cargo}: <b>${nombre}</b></p>`;
                 });
-        
-                const montosPorZ = new Array(7).fill(0).map(()=>({
-                    primer:0,
-                    segundo:0,
-                    presupuesto:0
-                }));
-        
-                Object.keys(dir.datosSemestres).forEach(sem=>{
-        
+    
+                const montosPorZ = new Array(7).fill(0).map(() => ({ primer: 0, segundo: 0, presupuesto: 0 }));
+    
+                Object.keys(dir.datosSemestres).forEach(sem => {
                     const semData = dir.datosSemestres[sem];
-        
                     if (!semData.gastos) return;
-        
-                    semData.gastos.forEach(g=>{
-        
-                        const presup =
-                            (g.presupuestado||0) + (g.reestructura||0);
-        
-                        const comprom = g.comprometido||0;
-        
+                    semData.gastos.forEach(g => {
+                        const presup = (g.presupuestado || 0) + (g.reestructura || 0);
+                        const comprom = g.comprometido || 0;
                         const idx = Z_MAPPING[`Z=${g.codigoZ}`];
-        
-                        if(idx===undefined) return;
-        
-                        if(sem==="primer_semestre"){
-        
+                        if (idx === undefined) return;
+                        
+                        if (sem === "primer_semestre") {
                             montosPorZ[idx].primer += comprom;
-        
-                            if(!montosPorZ[idx].presupuesto){
-                                montosPorZ[idx].presupuesto = presup;
-                            }
-                        }
-        
-                        if(sem==="segundo_semestre"){
-        
+                            if (!montosPorZ[idx].presupuesto) montosPorZ[idx].presupuesto = presup;
+                        } else if (sem === "segundo_semestre") {
                             montosPorZ[idx].segundo += comprom;
-        
                             montosPorZ[idx].presupuesto = presup;
                         }
                     });
                 });
-        
-                const compromPrimerSem =
-                    montosPorZ.reduce((a,z)=>a+z.primer,0);
-        
-                const compromSegundoSem =
-                    montosPorZ.reduce((a,z)=>a+z.segundo,0);
-        
-                const presupTotal =
-                    montosPorZ.reduce((a,z)=>a+z.presupuesto,0);
-        
-                const ctx =
-                    document.getElementById("chart-actual").getContext("2d");
-        
-                if(chartInstance) chartInstance.destroy();
-        
-                chartInstance = new Chart(ctx,{
-                    type:'bar',
-                    data:{
-                        labels:['Presupuestado','Ejecutado'],
-                        datasets:[
-                            {
-                                label:'1° Semestre',
-                                data:[presupTotal,compromPrimerSem],
-                                backgroundColor:'#3B9C80'
+    
+                const compromPrimerSem = montosPorZ.reduce((a, z) => a + z.primer, 0);
+                const compromSegundoSem = montosPorZ.reduce((a, z) => a + z.segundo, 0);
+                const presupTotal = montosPorZ.reduce((a, z) => a + z.presupuesto, 0);
+    
+                const canvas = document.getElementById("chart-actual");
+                if (!canvas) return;
+                const ctx = canvas.getContext("2d");
+                if (chartInstance) chartInstance.destroy();
+    
+                chartInstance = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Presupuestado', 'Ejecutado'],
+                        datasets: [
+                            { 
+                                label: 'Presupuesto Anual', 
+                                data: [presupTotal, 0], // Solo aparece en la primera barra
+                                backgroundColor: '#3A84B0' 
                             },
-                            {
-                                label:'2° Semestre',
-                                data:[0,compromSegundoSem],
-                                backgroundColor:'#C05F72'
+                            { 
+                                label: '1° Semestre', 
+                                data: [0, compromPrimerSem], // Solo aparece en la segunda barra
+                                backgroundColor: '#3B9C80' 
+                            },
+                            { 
+                                label: '2° Semestre', 
+                                data: [0, compromSegundoSem], // Se apila sobre el 1° semestre en la segunda barra
+                                backgroundColor: '#C05F72' 
                             }
                         ]
                     },
-                    options:{
-                        responsive:true,
-                        maintainAspectRatio:false,
-                        scales:{
-                            x:{stacked:true},
-                            y:{stacked:true}
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom' }
+                        },
+                        scales: { 
+                            x: { stacked: true }, 
+                            y: { 
+                                stacked: true,
+                                ticks: { callback: v => "$" + v.toLocaleString("es-AR") }
+                            } 
                         }
                     }
                 });
-        
-                const bars =
-                    document.querySelectorAll('#progress-container .progress');
-        
-                const titles =
-                    document.querySelectorAll('#progress-container .progress-title');
-        
-                bars.forEach((bar,i)=>{
-        
+    
+                const bars = document.querySelectorAll('#progress-container .progress');
+                const titles = document.querySelectorAll('#progress-container .progress-title');
+    
+                bars.forEach((bar, i) => {
                     const total = montosPorZ[i].primer + montosPorZ[i].segundo;
-const presupuestoZ = montosPorZ[i].presupuesto;
-
-const pctPrimer = presupuestoZ
-    ? (montosPorZ[i].primer / presupuestoZ) * 100
-    : 0;
-
-const pctSegundo = presupuestoZ
-    ? (montosPorZ[i].segundo / presupuestoZ) * 100
-    : 0;
-
-const pctTotal = pctPrimer + pctSegundo;
-        
-bar.innerHTML = `
-<div class="determinate"
-style="
-width:${Math.min(pctTotal,100)}%;
-background:linear-gradient(
-90deg,
-#3B9C80 ${pctPrimer}%,
-#C05F72 ${pctPrimer}%
-);
-"
-title="1° Semestre: $${montosPorZ[i].primer.toLocaleString("es-AR")}
- | 2° Semestre: $${montosPorZ[i].segundo.toLocaleString("es-AR")}"
->
-</div>`;
-        
-                    titles[i].innerHTML =
-                        `${PROGRESS_TITLES[i]} — $ ${total.toLocaleString("es-AR")}`;
+                    const presupuestoZ = montosPorZ[i].presupuesto;
+                    const pctPrimer = presupuestoZ ? (montosPorZ[i].primer / presupuestoZ) * 100 : 0;
+                    const pctSegundo = presupuestoZ ? (montosPorZ[i].segundo / presupuestoZ) * 100 : 0;
+                    const pctTotal = pctPrimer + pctSegundo;
+    
+                    bar.innerHTML = `
+                    <div class="determinate" style="width:${Math.min(pctTotal, 100)}%; background:linear-gradient(90deg, #3B9C80 ${pctPrimer}%, #C05F72 ${pctPrimer}%);"
+                    title="1° Semestre: $${montosPorZ[i].primer.toLocaleString("es-AR")} | 2° Semestre: $${montosPorZ[i].segundo.toLocaleString("es-AR")}">
+                    </div>`;
+                    titles[i].innerHTML = `${PROGRESS_TITLES[i]} — $ ${total.toLocaleString("es-AR")}`;
                 });
             }
-        
+    
+            function mostrarIngresos() {
+                const grid = document.getElementById("ingresos-grid");
+                if (!grid || !ingresosData) return;
+                grid.innerHTML = "";
+    
+                const year = Object.keys(ingresosData)[0];
+                const codigos = ingresosData[year];
+    
+                Object.keys(codigos).forEach(codigo => {
+                    const item = codigos[codigo];
+                    const total = Object.values(item.ingresado).reduce((a, b) => a + b, 0);
+                    const card = document.createElement("div");
+                    card.className = "bento-item";
+                    const canvasId = "chart_ing_" + codigo.replace(/\s+/g, '_');
+    
+                    card.innerHTML = `
+                        <h6><b>${codigo}</b> - ${item.descripcion}</h6>
+                        <canvas id="${canvasId}" height="120"></canvas>
+                        <div style="margin-top:10px;font-weight:500;color:#4a148c">
+                            Recaudación total $${total.toLocaleString("es-AR")}
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                    crearGraficoIngresos(canvasId, item);
+                });
+            }
+    
+            function crearGraficoIngresos(canvasId, item) {
+                const canvas = document.getElementById(canvasId);
+                if (!canvas) return;
+                const ctx = canvas.getContext("2d");
+                const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+                const valores = Object.values(item.ingresado);
+    
+                new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: meses,
+                        datasets: [{ data: valores, backgroundColor: "#8C4E80" }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { ticks: { callback: v => "$" + v.toLocaleString("es-AR") } } }
+                    }
+                });
+            }
         });
-        </script>
+    </script>
 </body>
 </html>
