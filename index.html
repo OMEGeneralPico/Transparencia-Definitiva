@@ -96,7 +96,17 @@
         .progress .determinate { border-radius: 8px; background-color: #4a148c !important; }
 
         #logo-final { text-align: center; padding: 20px; margin-top: 30px; }
-</style>
+
+        /* FORMATO MONEDA */
+        .currency-format {
+            font-weight: 500;
+            color: #2e7d32;
+        }
+        .currency-format::before {
+            content: "$";
+            color: #2e7d32;
+        }
+    </style>
 </head>
 
 <body>
@@ -421,7 +431,18 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         plugins: {
-                            legend: { position: 'bottom' }
+                            legend: { position: 'bottom' },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        return label + '$' + context.parsed.y.toLocaleString("es-AR");
+                                    }
+                                }
+                            }
                         },
                         scales: { 
                             x: { stacked: true }, 
@@ -447,7 +468,7 @@
                     <div class="determinate" style="width:${Math.min(pctTotal, 100)}%; background:linear-gradient(90deg, #3B9C80 ${pctPrimer}%, #C05F72 ${pctPrimer}%);"
                     title="1° Semestre: $${montosPorZ[i].primer.toLocaleString("es-AR")} | 2° Semestre: $${montosPorZ[i].segundo.toLocaleString("es-AR")}">
                     </div>`;
-                    titles[i].innerHTML = `${PROGRESS_TITLES[i]} — $ ${total.toLocaleString("es-AR")}`;
+                    titles[i].innerHTML = `${PROGRESS_TITLES[i]} — <span class="currency-format">${total.toLocaleString("es-AR")}</span>`;
                 });
             }
     
@@ -465,12 +486,12 @@
                     const card = document.createElement("div");
                     card.className = "bento-item";
                     const canvasId = "chart_ing_" + codigo.replace(/\s+/g, '_');
-    
+
                     card.innerHTML = `
                         <h6><b>${codigo}</b> - ${item.descripcion}</h6>
                         <canvas id="${canvasId}" height="120"></canvas>
                         <div style="margin-top:10px;font-weight:500;color:#4a148c">
-                            Recaudación total $${total.toLocaleString("es-AR")}
+                            Recaudación total <span class="currency-format">${total.toLocaleString("es-AR")}</span>
                         </div>
                     `;
                     grid.appendChild(card);
@@ -493,7 +514,16 @@
                     },
                     options: {
                         responsive: true,
-                        plugins: { legend: { display: false } },
+                        plugins: { 
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return '$' + context.parsed.y.toLocaleString("es-AR");
+                                    }
+                                }
+                            }
+                        },
                         scales: { y: { ticks: { callback: v => "$" + v.toLocaleString("es-AR") } } }
                     }
                 });
