@@ -476,27 +476,152 @@
                 const grid = document.getElementById("ingresos-grid");
                 if (!grid || !ingresosData) return;
                 grid.innerHTML = "";
-    
-                const year = Object.keys(ingresosData)[0];
-                const codigos = ingresosData[year];
-    
-                Object.keys(codigos).forEach(codigo => {
-                    const item = codigos[codigo];
-                    const total = Object.values(item.ingresado).reduce((a, b) => a + b, 0);
-                    const card = document.createElement("div");
-                    card.className = "bento-item";
-                    const canvasId = "chart_ing_" + codigo.replace(/\s+/g, '_');
 
-                    card.innerHTML = `
-                        <h6><b>${codigo}</b> - ${item.descripcion}</h6>
-                        <canvas id="${canvasId}" height="120"></canvas>
-                        <div style="margin-top:10px;font-weight:500;color:#4a148c">
-                            Recaudación total <span class="currency-format">${total.toLocaleString("es-AR")}</span>
-                        </div>
-                    `;
-                    grid.appendChild(card);
-                    crearGraficoIngresos(canvasId, item);
-                });
+                const year = Object.keys(ingresosData)[0];
+                const datosAnio = ingresosData[year];
+
+                // Crear selector de partida principal
+                const selectorPrincipalDiv = document.createElement("div");
+                selectorPrincipalDiv.className = "bento-item";
+                selectorPrincipalDiv.style.padding = "12px 20px !important";
+                selectorPrincipalDiv.innerHTML = `
+                    <div class="input-field" style="margin-bottom: 0;">
+                        <select id="partida-principal-select">
+                            <option value="">Seleccionar partida principal</option>
+                            ${Object.keys(datosAnio).map(codigo => 
+                                `<option value="${codigo}">${codigo} - ${datosAnio[codigo].descripcion || ''}</option>`
+                            ).join('')}
+                        </select>
+                        <label>Partida Principal</label>
+                    </div>
+                `;
+                grid.appendChild(selectorPrincipalDiv);
+
+                // Crear selector de subpartida
+                const selectorSubpartidaDiv = document.createElement("div");
+                selectorSubpartidaDiv.className = "bento-item";
+                selectorSubpartidaDiv.style.padding = "12px 20px !important";
+                selectorSubpartidaDiv.innerHTML = `
+                    <div class="input-field" style="margin-bottom: 0;">
+                        <select id="subpartida-select" disabled>
+                            <option value="">Seleccionar subpartida</option>
+                        </select>
+                        <label>Subpartida</label>
+                    </div>
+                `;
+                grid.appendChild(selectorSubpartidaDiv);
+
+                // Crear selector de código detallado
+                const selectorDetalladoDiv = document.createElement("div");
+                selectorDetalladoDiv.className = "bento-item";
+                selectorDetalladoDiv.style.padding = "12px 20px !important";
+                selectorDetalladoDiv.innerHTML = `
+                    <div class="input-field" style="margin-bottom: 0;">
+                        <select id="codigo-detallado-select" disabled>
+                            <option value="">Seleccionar código detallado</option>
+                        </select>
+                        <label>Código Detallado</label>
+                    </div>
+                `;
+                grid.appendChild(selectorDetalladoDiv);
+
+                // Crear contenedor para el gráfico
+                const chartContainer = document.createElement("div");
+                chartContainer.className = "bento-item";
+                chartContainer.id = "chart-container";
+                grid.appendChild(chartContainer);
+
+                // Inicializar los selects de Materialize
+                M.FormSelect.init(document.querySelectorAll('select'));
+
+                // Evento change del select principal
+                document.getElementById("partida-principal-select").onchange = (e) => {
+                    const partidaSeleccionada = e.target.value;
+                    const subpartidaSelect = document.getElementById("subpartida-select");
+                    const codigoDetalladoSelect = document.getElementById("codigo-detallado-select");
+                    
+                    // Limpiar selects dependientes
+                    subpartidaSelect.innerHTML = '<option value="">Seleccionar subpartida</option>';
+                    codigoDetalladoSelect.innerHTML = '<option value="">Seleccionar código detallado</option>';
+                    subpartidaSelect.disabled = true;
+                    codigoDetalladoSelect.disabled = true;
+                    
+                    if (partidaSeleccionada && datosAnio[partidaSeleccionada].hijos) {
+                        subpartidaSelect.disabled = false;
+                        Object.keys(datosAnio[partidaSeleccionada].hijos).forEach(codigo => {
+                            const option = document.createElement("option");
+                            option.value = codigo;
+                            option.textContent = `${codigo} - ${datosAnio[partidaSeleccionada].hijos[codigo].descripcion || ''}`;
+                            subpartidaSelect.appendChild(option);
+                        });
+                        
+                        // Si la partida principal tiene datos directos, mostrar gráfico
+                        if (datosAnio[partidaSeleccionada].ingresado) {
+                            mostrarGraficoIngreso(partidaSeleccionada, datosAnio[partidaSeleccionada]);
+                        }
+                    }
+                    M.FormSelect.init(document.querySelectorAll('select'));
+                };
+
+                // Evento change del select de subpartida
+                document.getElementById("subpartida-select").onchange = (e) => {
+                    const partidaPrincipal = document.getElementById("partida-principal-select").value;
+                    const subpartidaSeleccionada = e.target.value;
+                    const codigoDetalladoSelect = document.getElementById("codigo-detallado-select");
+                    
+                    // Limpiar select detallado
+                    codigoDetalladoSelect.innerHTML = '<option value="">Seleccionar código detallado</option>';
+                    codigoDetalladoSelect.disabled = true;
+                    
+                    if (subpartidaSeleccionada && datosAnio[partidaPrincipal].hijos[subpartidaSeleccionada]) {
+                        const subpartidaData = datosAnio[partidaPrincipal].hijos[subpartidaSeleccionada];
+                        
+                        // Si la subpartida tiene hijos (códigos detallados)
+                        if (subpartidaData.hijos) {
+                            codigoDetalladoSelect.disabled = false;
+                            Object.keys(subpartidaData.hijos).forEach(codigo => {
+                                const option = document.createElement("option");
+                                option.value = codigo;
+                                option.textContent = `${codigo} - ${subpartidaData.hijos[codigo].descripcion || ''}`;
+                                codigoDetalladoSelect.appendChild(option);
+                            });
+                        }
+                        
+                        // Si la subpartida tiene datos directos, mostrar gráfico
+                        if (subpartidaData.ingresado) {
+                            mostrarGraficoIngreso(subpartidaSeleccionada, subpartidaData);
+                        }
+                    }
+                    M.FormSelect.init(document.querySelectorAll('select'));
+                };
+
+                // Evento change del select detallado
+                document.getElementById("codigo-detallado-select").onchange = (e) => {
+                    const partidaPrincipal = document.getElementById("partida-principal-select").value;
+                    const subpartidaSeleccionada = document.getElementById("subpartida-select").value;
+                    const codigoDetalladoSeleccionado = e.target.value;
+                    
+                    if (codigoDetalladoSeleccionado) {
+                        const codigoData = datosAnio[partidaPrincipal].hijos[subpartidaSeleccionada].hijos[codigoDetalladoSeleccionado];
+                        mostrarGraficoIngreso(codigoDetalladoSeleccionado, codigoData);
+                    }
+                };
+            }
+
+            function mostrarGraficoIngreso(codigo, item) {
+                const chartContainer = document.getElementById("chart-container");
+                const total = Object.values(item.ingresado).reduce((a, b) => a + b, 0);
+                const canvasId = "chart_ing_selected";
+
+                chartContainer.innerHTML = `
+                    <h6><b>${codigo}</b> - ${item.descripcion}</h6>
+                    <canvas id="${canvasId}" height="120"></canvas>
+                    <div style="margin-top:10px;font-weight:500;color:#4a148c">
+                        Recaudación total <span class="currency-format">${total.toLocaleString("es-AR")}</span>
+                    </div>
+                `;
+
+                crearGraficoIngresos(canvasId, item);
             }
     
             function crearGraficoIngresos(canvasId, item) {
