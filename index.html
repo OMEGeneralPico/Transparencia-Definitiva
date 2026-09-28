@@ -194,7 +194,7 @@
             let chartInstance = null;
             let ingresosData = null;
     
-            const Z_MAPPING = { "Z=1": 0, "Z=2": 1, "Z=3": 2, "Z=4": 3, "Z=5": 4, "Z=6": 5, "Z=7": 6 };
+            const Z_MAPPING = { "1": 0, "2": 1, "3": 2, "4": 3, "5": 4, "6": 5, "7": 6 };
     
             const PROGRESS_TITLES = Array.from(document.querySelectorAll('#progress-container .progress-title'))
                 .map(t => t.innerText.split('—')[0].trim());
@@ -383,7 +383,7 @@
                     semData.gastos.forEach(g => {
                         const presup = (g.presupuestado || 0) + (g.reestructura || 0);
                         const comprom = g.comprometido || 0;
-                        const idx = Z_MAPPING[`Z=${g.codigoZ}`];
+                        const idx = Z_MAPPING[String(g.codigoZ).replace("Z=", "")];
                         if (idx === undefined) return;
                         
                         if (sem === "primer_semestre") {
@@ -463,9 +463,10 @@
                     const pctPrimer = presupuestoZ ? (montosPorZ[i].primer / presupuestoZ) * 100 : 0;
                     const pctSegundo = presupuestoZ ? (montosPorZ[i].segundo / presupuestoZ) * 100 : 0;
                     const pctTotal = pctPrimer + pctSegundo;
+                    const pctPrimerSobreEjecutado = total ? (montosPorZ[i].primer / total) * 100 : 0;
     
                     bar.innerHTML = `
-                    <div class="determinate" style="width:${Math.min(pctTotal, 100)}%; background:linear-gradient(90deg, #3B9C80 ${pctPrimer}%, #C05F72 ${pctPrimer}%);"
+                    <div class="determinate" style="width:${Math.min(pctTotal, 100)}%; background:linear-gradient(90deg, #3B9C80 ${pctPrimerSobreEjecutado}%, #C05F72 ${pctPrimerSobreEjecutado}%);"
                     title="1° Semestre: $${montosPorZ[i].primer.toLocaleString("es-AR")} | 2° Semestre: $${montosPorZ[i].segundo.toLocaleString("es-AR")}">
                     </div>`;
                     titles[i].innerHTML = `${PROGRESS_TITLES[i]} — <span class="currency-format">${total.toLocaleString("es-AR")}</span>`;
