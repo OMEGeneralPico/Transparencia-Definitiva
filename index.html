@@ -204,7 +204,7 @@
                 .then(r => r.json())
                 .then(data => {
                     dataGlobal = data;
-                    YEAR_SELECTED = Object.keys(dataGlobal)[0];
+                    YEAR_SELECTED = Object.keys(dataGlobal).sort((a, b) => Number(b) - Number(a))[0];
                     cargarModalAnios();
                     cargarSemestresSidebar();
                 });
@@ -236,13 +236,16 @@
                 const lista = document.getElementById("lista-anios");
                 if (!lista) return;
                 lista.innerHTML = "";
-                Object.keys(dataGlobal).forEach(anio => {
+                Object.keys(dataGlobal).sort((a, b) => Number(b) - Number(a)).forEach(anio => {
                     let a = document.createElement('a');
                     a.className = "collection-item";
                     a.innerText = anio;
                     a.onclick = () => {
                         YEAR_SELECTED = anio;
                         cargarSemestresSidebar();
+                        if (document.getElementById("ingresos-grid").style.display !== "none") {
+                            mostrarIngresos();
+                        }
                         M.Modal.getInstance(document.getElementById("modal-anios")).close();
                     };
                     lista.appendChild(a);
@@ -478,7 +481,9 @@
                 if (!grid || !ingresosData) return;
                 grid.innerHTML = "";
 
-                const year = Object.keys(ingresosData)[0];
+                const year = ingresosData[YEAR_SELECTED]
+                    ? YEAR_SELECTED
+                    : Object.keys(ingresosData).sort((a, b) => Number(b) - Number(a))[0];
                 const datosAnio = ingresosData[year];
 
                 // Crear selector de partida principal
