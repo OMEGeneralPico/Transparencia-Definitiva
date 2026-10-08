@@ -28,6 +28,13 @@
             padding: 0 15px;
         }
         #top-navbar img { height: 45px; margin-left: 10px; }
+        #anio-navbar {
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+            margin-left: auto;
+            padding-right: 20px;
+        }
         .sidenav-trigger { color: white !important; display: block; }
 
         /* LAYOUT */
@@ -114,6 +121,7 @@
     <nav id="top-navbar">
         <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <img src="imagenes/pico.png" alt="Logo">
+        <div id="anio-navbar">Año</div>
     </nav>
 
     <div id="layout">
@@ -198,13 +206,33 @@
     
             const PROGRESS_TITLES = Array.from(document.querySelectorAll('#progress-container .progress-title'))
                 .map(t => t.innerText.split('—')[0].trim());
+
+            function obtenerAnioURL() {
+                const params = new URLSearchParams(window.location.search);
+                return params.get("anio") || params.get("year");
+            }
+
+            function actualizarAnio(anio, actualizarURL = true) {
+                YEAR_SELECTED = anio;
+                const anioNavbar = document.getElementById("anio-navbar");
+                if (anioNavbar) anioNavbar.innerText = `Año ${anio}`;
+
+                if (actualizarURL) {
+                    const url = new URL(window.location.href);
+                    url.searchParams.set("anio", anio);
+                    url.searchParams.delete("year");
+                    window.history.replaceState({}, "", url);
+                }
+            }
     
             // Carga de datos
             fetch("presupuesto.json")
                 .then(r => r.json())
                 .then(data => {
                     dataGlobal = data;
-                    YEAR_SELECTED = Object.keys(dataGlobal).sort((a, b) => Number(b) - Number(a))[0];
+                    const aniosDisponibles = Object.keys(dataGlobal).sort((a, b) => Number(b) - Number(a));
+                    const anioURL = obtenerAnioURL();
+                    actualizarAnio(aniosDisponibles.includes(anioURL) ? anioURL : aniosDisponibles[0], Boolean(anioURL));
                     cargarModalAnios();
                     cargarSemestresSidebar();
                 });
@@ -241,7 +269,7 @@
                     a.className = "collection-item";
                     a.innerText = anio;
                     a.onclick = () => {
-                        YEAR_SELECTED = anio;
+                        actualizarAnio(anio);
                         cargarSemestresSidebar();
                         if (document.getElementById("ingresos-grid").style.display !== "none") {
                             mostrarIngresos();
@@ -486,6 +514,29 @@
                     : Object.keys(ingresosData).sort((a, b) => Number(b) - Number(a))[0];
                 const datosAnio = ingresosData[year];
 
+                function crearIngresoAgregado(codigo, descripcion, items) {
+                    const ingresado = {};
+                    const clavesMeses = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+                    clavesMeses.forEach(mes => ingresado[mes] = 0);
+
+                    items.forEach(item => {
+                        const ingresoItem = item.ingresado
+                            ? item.ingresado
+                            : crearIngresoAgregado("", "", Object.values(item.hijos || {})).ingresado;
+
+                        clavesMeses.forEach(mes => {
+                            ingresado[mes] += ingresoItem[mes] || 0;
+                        });
+                    });
+
+                    return { codigo, descripcion, ingresado };
+                }
+
+                function reiniciarSelect(select, texto, habilitado = false) {
+                    select.innerHTML = `<option value="">${texto}</option>`;
+                    select.disabled = !habilitado;
+                }
+
                 // Crear selector de partida principal
                 const selectorPrincipalDiv = document.createElement("div");
                 selectorPrincipalDiv.className = "bento-item";
@@ -494,6 +545,7 @@
                     <div class="input-field" style="margin-bottom: 0;">
                         <select id="partida-principal-select">
                             <option value="">Seleccionar partida principal</option>
+                            <option value="__total__">Total de partidas principales</option>
                             ${Object.keys(datosAnio).map(codigo => 
                                 `<option value="${codigo}">${codigo} - ${datosAnio[codigo].descripcion || ''}</option>`
                             ).join('')}
@@ -547,13 +599,21 @@
                     const codigoDetalladoSelect = document.getElementById("codigo-detallado-select");
                     
                     // Limpiar selects dependientes
-                    subpartidaSelect.innerHTML = '<option value="">Seleccionar subpartida</option>';
-                    codigoDetalladoSelect.innerHTML = '<option value="">Seleccionar código detallado</option>';
-                    subpartidaSelect.disabled = true;
-                    codigoDetalladoSelect.disabled = true;
+                    reiniciarSelect(subpartidaSelect, "Seleccionar subpartida");
+                    reiniciarSelect(codigoDetalladoSelect, "Seleccionar código detallado");
+
+                    if (partidaSeleccionada === "__total__") {
+                        mostrarGraficoIngreso("Total", crearIngresoAgregado("Total", "Todas las partidas principales", Object.values(datosAnio)));
+                        M.FormSelect.init(document.querySelectorAll('select'));
+                        return;
+                    }
                     
                     if (partidaSeleccionada && datosAnio[partidaSeleccionada].hijos) {
                         subpartidaSelect.disabled = false;
+                        const totalOption = document.createElement("option");
+                        totalOption.value = "__total__";
+                        totalOption.textContent = "Total de subpartidas";
+                        subpartidaSelect.appendChild(totalOption);
                         Object.keys(datosAnio[partidaSeleccionada].hijos).forEach(codigo => {
                             const option = document.createElement("option");
                             option.value = codigo;
@@ -576,8 +636,14 @@
                     const codigoDetalladoSelect = document.getElementById("codigo-detallado-select");
                     
                     // Limpiar select detallado
-                    codigoDetalladoSelect.innerHTML = '<option value="">Seleccionar código detallado</option>';
-                    codigoDetalladoSelect.disabled = true;
+                    reiniciarSelect(codigoDetalladoSelect, "Seleccionar código detallado");
+
+                    if (partidaPrincipal && subpartidaSeleccionada === "__total__") {
+                        const hijosPartida = Object.values(datosAnio[partidaPrincipal].hijos || {});
+                        mostrarGraficoIngreso("Total", crearIngresoAgregado("Total", "Todas las subpartidas", hijosPartida));
+                        M.FormSelect.init(document.querySelectorAll('select'));
+                        return;
+                    }
                     
                     if (subpartidaSeleccionada && datosAnio[partidaPrincipal].hijos[subpartidaSeleccionada]) {
                         const subpartidaData = datosAnio[partidaPrincipal].hijos[subpartidaSeleccionada];
@@ -585,6 +651,10 @@
                         // Si la subpartida tiene hijos (códigos detallados)
                         if (subpartidaData.hijos) {
                             codigoDetalladoSelect.disabled = false;
+                            const totalOption = document.createElement("option");
+                            totalOption.value = "__total__";
+                            totalOption.textContent = "Total de códigos detallados";
+                            codigoDetalladoSelect.appendChild(totalOption);
                             Object.keys(subpartidaData.hijos).forEach(codigo => {
                                 const option = document.createElement("option");
                                 option.value = codigo;
@@ -607,7 +677,10 @@
                     const subpartidaSeleccionada = document.getElementById("subpartida-select").value;
                     const codigoDetalladoSeleccionado = e.target.value;
                     
-                    if (codigoDetalladoSeleccionado) {
+                    if (codigoDetalladoSeleccionado === "__total__") {
+                        const hijosSubpartida = Object.values(datosAnio[partidaPrincipal].hijos[subpartidaSeleccionada].hijos || {});
+                        mostrarGraficoIngreso("Total", crearIngresoAgregado("Total", "Todos los códigos detallados", hijosSubpartida));
+                    } else if (codigoDetalladoSeleccionado) {
                         const codigoData = datosAnio[partidaPrincipal].hijos[subpartidaSeleccionada].hijos[codigoDetalladoSeleccionado];
                         mostrarGraficoIngreso(codigoDetalladoSeleccionado, codigoData);
                     }
